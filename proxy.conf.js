@@ -1,0 +1,9 @@
+var PROXY_CONFIG = {
+  '/api': {
+    'target':'http://localhost:3000',
+    'secure':false,
+    'loglevel':'debug',
+    'changeOrigin':true,
+  }
+}
+module.exports = PROXY_CONFIG;
