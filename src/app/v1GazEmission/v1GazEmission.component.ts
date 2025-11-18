@@ -13,6 +13,7 @@ import {V1GazEmissionService} from "../shared/v1GazEmission.service";
 import {HotToastService} from "@ngxpert/hot-toast";
 import {AppConstants} from "../app.constant";
 import {CommonModule} from "@angular/common";
+import {MatDividerModule} from "@angular/material/divider";
 
 
 @Component({
@@ -28,7 +29,8 @@ import {CommonModule} from "@angular/common";
 	MatInputModule,
 	MatSelectModule,
 	ReactiveFormsModule,
-	CommonModule
+	CommonModule,
+	MatDividerModule
 	],
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
@@ -41,14 +43,33 @@ export class V1GazEmissionComponent implements OnInit{
 		weightFirstMaterialCarbonneEmission: new FormControl(0,Validators.min(0)),
 		firstMaterialCarbonneEmission : new FormControl(0,Validators.min(0)),
 		weightSecondMaterialCarbonneEmission: new FormControl(0,Validators.min(0)),
-		secondMaterialCarbonneEmission : new FormControl(0,Validators.min(0))
+		secondMaterialCarbonneEmission : new FormControl(0,Validators.min(0)),
+		containsRareMaterial: new FormControl(false)
 		
 	})
 	firstMaterialStatus=false;
 	secondMaterialStatus=false;
 	txtInfo=''
 	element1Status=false;
-	resultElement1=0
+	resultElement1=0;
+	rareMaterialsList: string[] = [
+		'Cerium',
+		'Neodymium',
+		'Dysprosium',
+		'Praseodymium',
+		'Erbium',
+		'Samarium',
+		'Europium',
+		'Scandium',
+		'Gadolinium',
+		'SmCo magnet (Aimant Samarium Cobalt)',
+		'Lanthanum',
+		'Terbium',
+		'Mischmetal',
+		'Ytterbium',
+		'Neodym',
+		'Yttrium'
+	];	
 	constructor(
 		private router:Router,
 		private v1GazEmissionService: V1GazEmissionService,
@@ -72,6 +93,11 @@ export class V1GazEmissionComponent implements OnInit{
 	showMaterials(firstMaterial:boolean,secondMaterial:boolean){
 		this.firstMaterialStatus = firstMaterial;
 		this.secondMaterialStatus = secondMaterial;
+	}
+
+	containsRareMaterialStatus(value:boolean){
+		this.v1GazEmissionForm.patchValue({containsRareMaterial:value})
+		console.log(this.v1GazEmissionForm.value)
 	}
 
 	save(){
