@@ -12,7 +12,7 @@
 					<mat-panel-title>V1</mat-panel-title>
 					<mat-panel-description>Émission de gaz à effet de serre</mat-panel-description>
 				</mat-expansion-panel-header>
-				<button mat-button>GOTO</button>
+				<button mat-button (click)="goTo('/v1')">GOTO</button>
 			</mat-expansion-panel>
 
 			<mat-expansion-panel (opened)="panelOpenState.set(true)" (closed)="panelOpenState.set(false)">
