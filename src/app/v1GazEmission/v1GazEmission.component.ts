@@ -97,7 +97,6 @@ export class V1GazEmissionComponent implements OnInit{
 
 	containsRareMaterialStatus(value:boolean){
 		this.v1GazEmissionForm.patchValue({containsRareMaterial:value})
-		console.log(this.v1GazEmissionForm.value)
 	}
 
 	save(){
