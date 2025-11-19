@@ -143,6 +143,79 @@
 		</mat-card-content>
 	</mat-card>
 </div>
+<br>
+<!--Criteria 3-->
+<div style="width: 70%;margin: auto;">
+	<mat-card appearance="outlined" style="padding: 1rem;">
+		<mat-card-header>
+			<mat-card-title>Transport</mat-card-title>
+		</mat-card-header>
+		<mat-card-content>
+			<form [formGroup]="v1GazEmissionForm">
+				<h2>Mode de transport et distances parcourues</h2>
+				<section>
+					<mat-label>Site de production Français (DOM-TOM exclus) ?</mat-label>
+					<mat-checkbox formControlName="productionSiteFrench">Oui</mat-checkbox>
+				</section>
+				@if(!v1GazEmissionForm.value.productionSiteFrench){
+				<mat-label>Transport 1</mat-label>
+				<mat-form-field style="margin:0 1rem;">
+					<mat-label>Modes de transport</mat-label>
+					<mat-select>
+						<mat-option value=""></mat-option>
 
-			<button matButton="tonal" style="margin-left: auto;" (click)="save()">Save</button>
+						@for(transport of transportMode; track transport){
+						<mat-option  [value]="transport.coef" (click)="setValueTransport(1,transport.coef)">{{transport.mode}}</mat-option>
+						}
+					</mat-select>
+				</mat-form-field>
+				<mat-form-field style="width: 20%;">
+					<mat-label>Distance Km</mat-label>
+					<input matInput type="number" formControlName="distanceMode1"> 
+				</mat-form-field>
+					@if(!addTransportStatement){
+					<button mat-icon-button (click)="addTransport()"><mat-icon>add</mat-icon></button>
+					}@else if (addTransportStatement) {
+						<br>
+						<mat-label>Transport 2</mat-label>
+						<mat-form-field style="margin:0 1rem;">
+							<mat-label>Modes de transport</mat-label>
+							<mat-select>
+								<mat-option value=""></mat-option>
+								@for(transport of transportMode; track transport){
+								<mat-option  [value]="transport.coef" (click)="setValueTransport(2,transport.coef)">{{transport.mode}}</mat-option>
+								}
+							</mat-select>
+						</mat-form-field>
+					<mat-form-field style="width: 20%;">
+						<mat-label>Distance Km</mat-label>
+						<input matInput type="number" formControlName="distanceMode2"> 
+					</mat-form-field>
+					<button mat-icon-button (click)="addTransport()"><mat-icon>remove</mat-icon></button>
+					}
+
+				}
+				<br>
+				<mat-divider></mat-divider>
+				<h2>Fabrication multisite</h2>
+
+				<mat-form-field style="width: 70%;margin:0 1rem;">
+
+				<mat-label>Nombre de site pour la fabrication et l'assemblage du produit</mat-label>
+					<mat-select formControlName="fabricationMultisite">
+						<mat-option></mat-option>
+						<mat-option [value]="1">1</mat-option>
+						<mat-option [value]="2">2</mat-option>
+						<mat-option [value]="3">3 ou plus</mat-option>
+					</mat-select>
+				</mat-form-field>
+			</form>
+		</mat-card-content>
+	</mat-card>
+</div>
+<br>
+<div style="align-items: center; justify-content: center;text-align: center;">
+
+	<button matButton="tonal" style="margin-left: auto;" (click)="save()">Save</button>
+</div>
 </div>
