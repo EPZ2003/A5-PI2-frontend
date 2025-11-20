@@ -15,6 +15,7 @@ import {AppConstants} from "../app.constant";
 import {CommonModule} from "@angular/common";
 import {MatDividerModule} from "@angular/material/divider";
 import {MatCheckboxModule} from "@angular/material/checkbox";
+import {MatRadioModule} from "@angular/material/radio";
 
 
 @Component({
@@ -32,7 +33,8 @@ import {MatCheckboxModule} from "@angular/material/checkbox";
 	ReactiveFormsModule,
 	CommonModule,
 	MatDividerModule,
-	MatCheckboxModule
+	MatCheckboxModule,
+	MatRadioModule
 	],
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
@@ -49,7 +51,13 @@ export class V1GazEmissionComponent implements OnInit{
 		containsRareMaterial: new FormControl(false),
 		totalElectrictyMix:  new FormControl(null,[Validators.required,Validators.min(0)]),
 		greenConsomation: new FormControl(false),
-		greenProductionSite: new FormControl(false)
+		greenProductionSite: new FormControl(false),
+		productionSiteFrench: new FormControl(false),
+		transportCoef1: new FormControl(0,Validators.required),
+		distanceMode1:  new FormControl(0,[Validators.required,Validators.min(0)]),
+		transportCoef2: new FormControl(0),
+		distanceMode2: new FormControl(0,[Validators.min(0)]),
+		fabricationMultisite: new FormControl(null,[Validators.required,Validators.min(0)])
 	})
 	firstMaterialStatus=false;
 	secondMaterialStatus=false;
@@ -57,6 +65,7 @@ export class V1GazEmissionComponent implements OnInit{
 	electrictyMixInfo=''
 	element1Status=false;
 	resultElement1=0;
+	addTransportStatement=false;
 	rareMaterialsList: string[] = [
 		'Cerium',
 		'Neodymium',
@@ -74,7 +83,30 @@ export class V1GazEmissionComponent implements OnInit{
 		'Ytterbium',
 		'Neodym',
 		'Yttrium'
-	];	
+	];
+	//Refer tab-6 page 31
+	transportMode = [
+		{
+			"mode":"Aerien",
+			"coef":1.6995
+		},
+		{
+			"mode":"Ferroviaire",
+			"coef":0.0277
+		},
+		{
+			"mode":"Fluvial",
+			"coef":0.0258
+		},
+		{
+			"mode":"Maritime",
+			"coef":0.0104
+		},
+		{
+			"mode":"Routier",
+			"coef":0.1666
+		}
+	]
 	constructor(
 		private router:Router,
 		private v1GazEmissionService: V1GazEmissionService,
@@ -101,21 +133,55 @@ export class V1GazEmissionComponent implements OnInit{
 	showMaterials(firstMaterial:boolean,secondMaterial:boolean){
 		this.firstMaterialStatus = firstMaterial;
 		this.secondMaterialStatus = secondMaterial;
+		//Clear inputs in different cases
+		if (!this.firstMaterialStatus && !this.secondMaterialStatus){
+			this.v1GazEmissionForm.patchValue({weightFirstMaterialCarbonneEmission:0})
+			this.v1GazEmissionForm.patchValue({firstMaterialCarbonneEmission:0})
+			this.v1GazEmissionForm.patchValue({weightSecondMaterialCarbonneEmission:0})
+			this.v1GazEmissionForm.patchValue({secondMaterialCarbonneEmission:0})
+		} else if(!this.firstMaterialStatus){	
+			this.v1GazEmissionForm.patchValue({weightFirstMaterialCarbonneEmission:0})
+			this.v1GazEmissionForm.patchValue({firstMaterialCarbonneEmission:0})
+		} else if(!this.secondMaterialStatus){	
+			this.v1GazEmissionForm.patchValue({weightSecondMaterialCarbonneEmission:0})
+			this.v1GazEmissionForm.patchValue({secondMaterialCarbonneEmission:0})
+		}
 	}
 
 	containsRareMaterialStatus(value:boolean){
 		this.v1GazEmissionForm.patchValue({containsRareMaterial:value})
 	}
 
-	save(){
-		if (!this.v1GazEmissionForm.valid){
+	setValueTransport(key:any,value:any) {
+		if (key ==1){	
+		this.v1GazEmissionForm.patchValue({transportCoef1 :value})
+		} else if (key == 2) {
+			this.v1GazEmissionForm.patchValue({transportCoef2:value})
+		}
+	}
+
+	addTransport(){
+		this.addTransportStatement = this.addTransportStatement ? false : true
+		if(!this.addTransportStatement){
+			this.v1GazEmissionForm.patchValue({transportCoef2:0})
+			this.v1GazEmissionForm.patchValue({distanceMode2:0})
+		}
+	}
+
+	
+
+	save(){ 
+		if (!this.v1GazEmissionForm.valid) {
 			return;
-		}console.log(this.v1GazEmissionForm.value)
+		}
+		if(this.v1GazEmissionForm.value.productionSiteFrench){
+			this.v1GazEmissionForm.patchValue({transportCoef1:0})
+			this.v1GazEmissionForm.patchValue({distanceMode1:0})
+		}
 		this.v1GazEmissionService.save(this.v1GazEmissionForm.value).subscribe({
 			next:(res:any)=>{
 				if (res){
-					console.log(res)
-					this.toastService.success('Critère 1 validé',{
+					this.toastService.success('Vulnérabilité 1 validé',{
 						duration:AppConstants.LONG_TEXT_DURATION,
 						dismissible:true
 						})
