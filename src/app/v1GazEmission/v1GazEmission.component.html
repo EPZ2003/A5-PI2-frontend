@@ -72,21 +72,6 @@
 					<input matInput type="number" formControlName="secondMaterialCarbonneEmission">
 				</mat-form-field>
 				}
-			@if(element1Status){
-			<div style="width: 40%;">
-				<mat-card class="example-card" appearance="outlined" style="padding: 1rem;">
-					<mat-card-header>
-						<mat-card-title>Intensité carbone du DM</mat-card-title>
-					</mat-card-header>
-					<mat-card-content>
-						<p><strong>{{resultElement1 | number:'1.2-2'}}</strong> CO2eq/g<p>	
-						<br>
-					</mat-card-content>
-					<mat-card-footer style="display: flex;justify-content: flex-end;">
-					</mat-card-footer>
-				</mat-card>
-			</div>
-			}
 			<br>
 			<mat-divider></mat-divider>
 			<h2>Intensité carbonne du produit</h2>
@@ -212,6 +197,19 @@
 			</form>
 		</mat-card-content>
 	</mat-card>
+</div>
+<br>
+<!--Vulnerability 1-->
+<div style="width: 70%;margin: auto;">
+	<mat-card appearance="outlined" style="padding: 1rem;">
+		<mat-card-header>
+			<mat-card-title>Vulnérabilité 1 - Emission de gaz et et effet de serre</mat-card-title>
+		</mat-card-header>
+			<mat-card-content>
+				<h2>{{vulnerability ? vulnerability: '--'}} points</h2>
+			</mat-card-content>
+	</mat-card>
+		
 </div>
 <br>
 <div style="align-items: center; justify-content: center;text-align: center;">

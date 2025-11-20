@@ -16,5 +16,9 @@ export class V1GazEmissionService {
 	save(fmData:any){
 		return this.httClient.post(this.url,fmData)
 	}
+
+	getVulnerability(id:number){
+		return this.httClient.get(this.url+'/getV1/'+id)
+	}
 }
 

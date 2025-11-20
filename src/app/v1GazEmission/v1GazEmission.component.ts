@@ -16,6 +16,7 @@ import {CommonModule} from "@angular/common";
 import {MatDividerModule} from "@angular/material/divider";
 import {MatCheckboxModule} from "@angular/material/checkbox";
 import {MatRadioModule} from "@angular/material/radio";
+import {of, switchMap,tap} from "rxjs";
 
 
 @Component({
@@ -36,7 +37,6 @@ import {MatRadioModule} from "@angular/material/radio";
 	MatCheckboxModule,
 	MatRadioModule
 	],
-	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class V1GazEmissionComponent implements OnInit{
 
@@ -66,6 +66,8 @@ export class V1GazEmissionComponent implements OnInit{
 	element1Status=false;
 	resultElement1=0;
 	addTransportStatement=false;
+	//Vulnerability 1 - Emission and Gaz
+	vulnerability=null;
 	rareMaterialsList: string[] = [
 		'Cerium',
 		'Neodymium',
@@ -166,9 +168,7 @@ export class V1GazEmissionComponent implements OnInit{
 			this.v1GazEmissionForm.patchValue({transportCoef2:0})
 			this.v1GazEmissionForm.patchValue({distanceMode2:0})
 		}
-	}
-
-	
+	}	
 
 	save(){ 
 		if (!this.v1GazEmissionForm.valid) {
@@ -178,20 +178,29 @@ export class V1GazEmissionComponent implements OnInit{
 			this.v1GazEmissionForm.patchValue({transportCoef1:0})
 			this.v1GazEmissionForm.patchValue({distanceMode1:0})
 		}
-		this.v1GazEmissionService.save(this.v1GazEmissionForm.value).subscribe({
-			next:(res:any)=>{
-				if (res){
-					this.toastService.success('Vulnérabilité 1 validé',{
+		//It's like the pipe is a huge request instead of 2 separates requests 
+		this.v1GazEmissionService.save(this.v1GazEmissionForm.value).pipe(
+			//From the first request do actions with the first return 
+			tap((res:any) => {
+				this.toastService.success('Vulnérabilité 1 validé',{
 						duration:AppConstants.LONG_TEXT_DURATION,
 						dismissible:true
 						})
-				}
 				this.v1GazEmissionForm.patchValue({id:res.id})
 				this.element1Status = true;
-				this.resultElement1 = res.resultElement1;
+			}),
+			//When you want to call the second request and using res items from the first item without update the html page 
+			switchMap((res:any) => {
+				if(res && res.id){
+					return this.v1GazEmissionService.getVulnerability(res.id)
+				}
+				return of(null); //Handle case where save fails / returns
+			}),
+		//Then bring data from the second request with the next item and finally update the html page	
+		).subscribe({
+			next:(vulnRes: any) => {
+				this.vulnerability = vulnRes
 				this.cd.detectChanges()
-			},error:(err:any) => {
-				console.log(err)
 			}
 		})
 	}
