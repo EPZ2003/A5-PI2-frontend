@@ -14,6 +14,7 @@ import {HotToastService} from "@ngxpert/hot-toast";
 import {AppConstants} from "../app.constant";
 import {CommonModule} from "@angular/common";
 import {MatDividerModule} from "@angular/material/divider";
+import {MatCheckboxModule} from "@angular/material/checkbox";
 
 
 @Component({
@@ -30,7 +31,8 @@ import {MatDividerModule} from "@angular/material/divider";
 	MatSelectModule,
 	ReactiveFormsModule,
 	CommonModule,
-	MatDividerModule
+	MatDividerModule,
+	MatCheckboxModule
 	],
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
@@ -44,12 +46,15 @@ export class V1GazEmissionComponent implements OnInit{
 		firstMaterialCarbonneEmission : new FormControl(0,Validators.min(0)),
 		weightSecondMaterialCarbonneEmission: new FormControl(0,Validators.min(0)),
 		secondMaterialCarbonneEmission : new FormControl(0,Validators.min(0)),
-		containsRareMaterial: new FormControl(false)
-		
+		containsRareMaterial: new FormControl(false),
+		totalElectrictyMix:  new FormControl(null,[Validators.required,Validators.min(0)]),
+		greenConsomation: new FormControl(false),
+		greenProductionSite: new FormControl(false)
 	})
 	firstMaterialStatus=false;
 	secondMaterialStatus=false;
 	txtInfo=''
+	electrictyMixInfo=''
 	element1Status=false;
 	resultElement1=0;
 	rareMaterialsList: string[] = [
@@ -85,6 +90,9 @@ export class V1GazEmissionComponent implements OnInit{
 	showInfos(){
 		this.txtInfo = this.txtInfo ? '' : 'Si vous ne savez pas répondre à un des champs demandé veuillez cliquer sur ce bouton ci-dessous qui vous permmetra de chercher vers le site officiel prévue à cet effet'
 	}
+	showElectricityMixInfo(){
+		this.electrictyMixInfo = this.electrictyMixInfo ? '' : 'Ce lien renvoie vers le site qui vous permmetra de remplir ce champ en mettant le pays de production principal du dispositif médical'
+	}
 
 	goTo(path:any){
 		this.router.navigate([path])
@@ -102,10 +110,11 @@ export class V1GazEmissionComponent implements OnInit{
 	save(){
 		if (!this.v1GazEmissionForm.valid){
 			return;
-		}
+		}console.log(this.v1GazEmissionForm.value)
 		this.v1GazEmissionService.save(this.v1GazEmissionForm.value).subscribe({
 			next:(res:any)=>{
 				if (res){
+					console.log(res)
 					this.toastService.success('Critère 1 validé',{
 						duration:AppConstants.LONG_TEXT_DURATION,
 						dismissible:true
