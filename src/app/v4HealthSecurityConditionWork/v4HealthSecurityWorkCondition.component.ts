@@ -1,5 +1,5 @@
 import {CommonModule} from "@angular/common";
-import {Component} from "@angular/core";
+import {ChangeDetectorRef, Component} from "@angular/core";
 import {FormControl, FormGroup, ReactiveFormsModule, Validators, ValueChangeEvent} from "@angular/forms";
 import {MatButtonModule} from "@angular/material/button";
 import {MatCardModule} from "@angular/material/card";
@@ -11,7 +11,7 @@ import {Router} from "@angular/router"
 import {V4HealthSecurityWorkCondtionService} from "../shared/v4HealthSecurityWorkCondition.service";
 import {HotToastService} from "@ngxpert/hot-toast";
 import {AppConstants} from "../app.constant";
-import {tap} from "rxjs";
+import {of, switchMap, tap} from "rxjs";
 import {MatCheckboxModule} from "@angular/material/checkbox";
 @Component({
 	selector: 'v4HealthSecurityWorkCondition',
@@ -48,11 +48,13 @@ export class V4HealthSecurityWorkConditionComponent {
 	showWorkAccidentStatement=false;
 	showBudgetDangerStatement=false;
 	showInvestDangerStatement=false;
+	vulnerability = null;
 
 	constructor(
 		private router:Router,
 		private v4HealthSecurityWorkConditionService: V4HealthSecurityWorkCondtionService,
-		private toastService : HotToastService
+		private toastService : HotToastService,
+		private cd: ChangeDetectorRef
 	){
 
 	}	
@@ -92,12 +94,21 @@ export class V4HealthSecurityWorkConditionComponent {
 					dismissible:true
 				})
 				this.v4HealthSecurityWorkConditionForm.patchValue({id:res.id})
+			}),
+			//After getting the id form the first step you can call the second request
+			switchMap((res:any) => {
+				if(res && res.id){
+					return this.v4HealthSecurityWorkConditionService.getVulnerability(res.id)
+				}
+				return of(null);
 			})
-			//switchMap((res:any) => {
-				
-			//})
+			// Then finally get the data from the second request and after that reload the html page 
 		).subscribe({
-			
-			})
+			next: (vulnRes: any) => {
+				this.vulnerability = vulnRes
+				//To force to update the page
+				this.cd.detectChanges()
+			}
+		})
 	}
 }
