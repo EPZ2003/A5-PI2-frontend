@@ -232,3 +232,16 @@ body {
     color:  map.get($azure-palette,900),
   ));	
 }
+.txt-info{
+	color:map.get($azure-palette,800)
+}
+
+.btn-danger{
+  @include mat.icon-overrides((
+    color:  map.get($red-palette,900),
+  ));	
+}
+
+.txt-danger{
+	color:map.get($red-palette,900)
+}
