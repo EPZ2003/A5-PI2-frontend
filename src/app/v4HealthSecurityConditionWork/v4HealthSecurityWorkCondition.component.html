@@ -157,6 +157,44 @@ etc.). <br><br>
 			</mat-card-content>
 		</mat-card>
 	</div>
+	<!--Criteria 4--->
+	<br>
+	<div style="width: 70%;margin: auto;">
+		<mat-card appearance="outlined" style="padding:1rem">
+			<mat-card-header>
+				<mat-card-title>Accident du travail</mat-card-title>
+			</mat-card-header>
+			<mat-card-content>
+				<br>
+				<form [formGroup]="v4HealthSecurityWorkConditionForm">
+					<h2><strong>Nombre de décès</strong></h2>
+					<section style="width: 45%; padding-right: 1rem;">
+						<mat-label>L'entreprise des décès suite à un ou des accidents de travail ? </mat-label>
+						<mat-checkbox formControlName="workDeath">Oui</mat-checkbox>
+					</section>
+					<br>
+					<mat-divider></mat-divider>
+					<h2><strong>Taux d'accident tu travail</strong></h2>
+					<mat-form-field style="width: 25%; padding-right: 1rem;">
+						<mat-label>Nombre d'accident de travail</mat-label>
+						<input matInput type="number" formControlName="workAccidentNumber">
+					</mat-form-field>
+					<button mat-icon-button class="btn-info" (click)="showWorkAccidentInfo()"><mat-icon>info</mat-icon></button>
+
+					@if(showWorkAccidentStatement){
+						<p class="txt-info">En ne compant seulement que les employés ayant entrainé une incapacité temporaire ou permanante, ou un décès</p>
+					}
+					<br>
+					<mat-form-field style="width: 25%; padding-right: 1rem;">
+						<mat-label>Nombre totale d'heure travaillé</mat-label>
+						<input matInput type="number" formControlName="totalWorkHour">
+					</mat-form-field>
+
+
+				</form>
+			</mat-card-content>
+		</mat-card>
+	</div>
 	<div style="display: flex; justify-content: center; width: 100%; margin: 2rem 0;">
 		<button matButton="tonal" (click)="save()">Save</button>
 	</div>

@@ -12,6 +12,7 @@ import {V4HealthSecurityWorkCondtionService} from "../shared/v4HealthSecurityWor
 import {HotToastService} from "@ngxpert/hot-toast";
 import {AppConstants} from "../app.constant";
 import {tap} from "rxjs";
+import {MatCheckboxModule} from "@angular/material/checkbox";
 @Component({
 	selector: 'v4HealthSecurityWorkCondition',
 	templateUrl :'v4HealthSecurityWorkCondition.component.html',
@@ -24,6 +25,7 @@ import {tap} from "rxjs";
 		ReactiveFormsModule,
 		CommonModule,
 		MatDividerModule,
+		MatCheckboxModule
 	]
 })
 export class V4HealthSecurityWorkConditionComponent {
@@ -36,10 +38,14 @@ export class V4HealthSecurityWorkConditionComponent {
 		budgetWorkHealthSecurity: new FormControl<Number>(0,[Validators.required,Validators.min(0)]),
 		totalWorkerNumber: new FormControl<Number>(0,[Validators.required,Validators.min(0)]),
 		scoreSPI : new FormControl<Number>(0,[Validators.required,Validators.max(100),Validators.min(0)]),
-		healthSecurityPrevention: new FormControl<Number>(0,[Validators.required,Validators.min(0),Validators.max(100)])
+		healthSecurityPrevention: new FormControl<Number>(0,[Validators.required,Validators.min(0),Validators.max(100)]),
+		workDeath : new FormControl(false),
+		workAccidentNumber: new FormControl<Number>(0,[Validators.required,Validators.min(0)]),
+		totalWorkHour : new FormControl<Number>(0,[Validators.required,Validators.min(0)])
 	})
 	showInvestStatement=false;
 	showBudgetStatement=false;
+	showWorkAccidentStatement=false;
 	showBudgetDangerStatement=false;
 	showInvestDangerStatement=false;
 
@@ -60,6 +66,10 @@ export class V4HealthSecurityWorkConditionComponent {
 
 	showBudgetInfo(){
 		this.showBudgetStatement = this.showBudgetStatement ? false : true
+	}
+
+	showWorkAccidentInfo(){
+		this.showWorkAccidentStatement = this.showWorkAccidentStatement ? false : true
 	}
 	
 	showInvestDanger(){
