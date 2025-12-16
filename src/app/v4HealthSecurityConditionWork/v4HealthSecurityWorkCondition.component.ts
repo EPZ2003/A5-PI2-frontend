@@ -34,7 +34,8 @@ export class V4HealthSecurityWorkConditionComponent {
 		averageHealthInvest : new FormControl<Number>(0,[Validators.required,Validators.min(0)]),
 		totalHealhInvest : new FormControl<Number>(0,[Validators.required,Validators.min(0)]),
 		budgetWorkHealthSecurity: new FormControl<Number>(0,[Validators.required,Validators.min(0)]),
-		totalWorkerNumber: new FormControl<Number>(0,[Validators.required,Validators.min(0)])	
+		totalWorkerNumber: new FormControl<Number>(0,[Validators.required,Validators.min(0)]),
+		scoreSPI : new FormControl<Number>(0,[Validators.max(100),Validators.min(0)])
 	})
 	showInvestStatement=false;
 	showBudgetStatement=false;
