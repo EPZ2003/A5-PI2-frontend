@@ -14,4 +14,8 @@ export class V4HealthSecurityWorkCondtionService{
 	save(fmData:any){
 		return this.httClient.post(this.url, fmData)
 	}
+
+	getVulnerability(id:number){
+		return this.httClient.get(this.url+'/getV4/'+id)
+	}
 }
