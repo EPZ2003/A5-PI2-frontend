@@ -36,7 +36,7 @@
 					<mat-panel-title>V4</mat-panel-title>
 					<mat-panel-description>Santé, sécurité et conditions de travail</mat-panel-description>
 				</mat-expansion-panel-header>
-				<button mat-button>GOTO</button>
+				<button mat-button (click)="goTo('/v4')">Allez au formulaire</button>
 			</mat-expansion-panel>
 
 			<mat-expansion-panel (opened)="panelOpenState.set(true)" (closed)="panelOpenState.set(false)">
