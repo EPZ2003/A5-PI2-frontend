@@ -33,13 +33,21 @@ export class V5BioacumulationToxicity {
 
 	V5BioacumulationToxicityForm = new FormGroup({
 		id: new FormControl<Number>(0, Validators.min(0)),
-		// Logic schema page 55 Figure 1
+		// Logic schema 1 page 55 Figure 1
 		makingProcessRisk: new FormControl(false),
 		makingProcessProtectionMeasure: new FormControl(false),
-		// Logic schema  page 57 Figure 2 
+		// Logic schema 2 page 57 Figure 2 
 		finalProductRiskMatter: new FormControl(false),
 		finalProductConcentration: new FormControl(false),
 		finalProductContactAbsence: new FormControl(false),
+		// Logic schema 3 page 59
+		labelWeitherClear: new FormControl(false),
+		labelPresencePicto: new FormControl(false),
+		labelTauxInferior: new FormControl(false),
+		//Logic schema 4 page 60
+		informationReadablity: new FormControl(false),
+		informationWithFds: new FormControl(false),
+		informationPresence: new FormControl(false),
 	})
 
 	finalProductInfoStatement = false;
