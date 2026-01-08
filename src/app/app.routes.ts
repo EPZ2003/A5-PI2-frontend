@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 import HomepageComponent from './homepage/homepage.component';
 import {V1GazEmissionComponent} from './v1GazEmission/v1GazEmission.component';
 import {V4HealthSecurityWorkConditionComponent} from './v4HealthSecurityConditionWork/v4HealthSecurityWorkCondition.component';
+import {V5BioacumulationToxicity} from './v5BioacumulationToxicity/v5BioacumulationToxicity.component';
 
 export const routes: Routes = [
 	{
@@ -15,5 +16,9 @@ export const routes: Routes = [
 	{
 		path: 'v4',
 		component: V4HealthSecurityWorkConditionComponent
+	},
+	{
+		path: 'v5',
+		component: V5BioacumulationToxicity
 	}
 ];

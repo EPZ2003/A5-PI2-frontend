@@ -1,0 +1,94 @@
+<div>
+	<br>
+	<div
+		style="position: relative; display: flex; align-items: center; justify-content: center; width: 100%; padding: 8px 0;">
+
+		<h1 style="margin: 0;">
+			Vulnérabilité 5 - Bioaccumulation et toxicité
+		</h1>
+
+		<div style="position: absolute; right: 16px; top: 50%; transform: translateY(-50%);">
+			<button mat-raised-button (click)="goTo('/')">
+				<mat-icon style="margin: auto;">home</mat-icon>
+
+			</button>
+		</div>
+
+	</div>
+	<!--Criteria 1--->
+	<br>
+	<div style="width: 70%;margin: auto;">
+		<mat-card appearance="outlined" style="padding: 1rem;">
+			<mat-card-header>
+				<mat-card-title>Phase de fabrication</mat-card-title>
+			</mat-card-header>
+			<mat-card-content>
+				<br>
+				<form [formGroup]="V5BioacumulationToxicityForm">
+					<h2><strong>Processus de fabrication</strong></h2>
+					<p>Recours à des substances à risques lors de la fabrication ?</p>
+					<mat-radio-group formControlName="makingProcessRisk">
+						<mat-radio-button [value]="true">oui</mat-radio-button>
+						<mat-radio-button [value]="false">non</mat-radio-button>
+					</mat-radio-group>
+					@if(V5BioacumulationToxicityForm.get('makingProcessRisk')?.value === true) {
+					<p>Recours à des substances à risques lors de la fabrication ?</p>
+					<mat-radio-group formControlName="makingProcessProtectionMeasure">
+						<mat-radio-button [value]="true">oui</mat-radio-button>
+						<mat-radio-button [value]="false">non</mat-radio-button>
+					</mat-radio-group>
+					}
+					<h2><strong>Produit fini</strong></h2>
+					<p>
+						Le dispositif médical contient des substances à risques ?
+
+						<button mat-icon-button class="btn-info" (click)="openInfoFinishProduct()">
+							<mat-icon style="margin: auto;">info</mat-icon>
+						</button>
+					</p>
+					<mat-radio-group formControlName="finalProductRiskMatter">
+						<mat-radio-button [value]="true">oui</mat-radio-button>
+						<mat-radio-button [value]="false">non</mat-radio-button>
+					</mat-radio-group>
+					@if(V5BioacumulationToxicityForm.get('finalProductRiskMatter')?.value === true) {
+					<p>La concentration à un taux < 0,1% ?</p>
+					<mat-radio-group formControlName="finalProductConcentration">
+						<mat-radio-button [value]="true">oui</mat-radio-button>
+						<mat-radio-button [value]="false">non</mat-radio-button>
+					</mat-radio-group>
+					<p>Le ou les produits finit du dispositif médical n'ont pas été en contact lors de la/leurs
+						conception ?</p>
+					<mat-radio-group formControlName="finalProductContactAbsence">
+						<mat-radio-button [value]="true">oui</mat-radio-button>
+						<mat-radio-button [value]="false">non</mat-radio-button>
+					</mat-radio-group>
+					}
+					@if(finalProductInfoStatement){
+					<div class="txt-info">
+						<p style="margin-top: 0;">
+							<strong>Règle de cumul :</strong> Si un produit contient plusieurs substances à
+							risque, dès que l'une d'entre elles dépasse le seuil de <strong>0,1 % m/m</strong>,
+							c'est elle qui est prise en considération.
+						</p>
+						<p style="margin-bottom: 0.5rem;"><strong>Exemple pour un DM « X » contenant :</strong>
+						</p>
+						<ul style="margin-top: 0; padding-left: 1.5rem;">
+							<li>Substance A : taux &lt; 0,1 % m/m</li>
+							<li>Substance B : taux <strong>&gt; 0,1 % m/m</strong></li>
+						</ul>
+
+						<p style="margin-bottom: 0; margin-top: 0.5rem;">
+							C'est la donnée de la <strong>Substance B</strong> qui prévaut. <br>
+							Cela conduit à répondre <strong>NON</strong> à la question <em>« concentration &lt;
+								0,1 % m/m »</em>.
+						</p>
+					</div>
+					}
+				</form>
+			</mat-card-content>
+		</mat-card>
+	</div>
+	<div style="display: flex; justify-content: center; width: 100%; margin: 2rem 0;">
+		<button matButton="tonal" (click)="save()">Save</button>
+	</div>
+</div>
