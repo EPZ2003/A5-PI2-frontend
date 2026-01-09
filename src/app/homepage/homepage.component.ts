@@ -32,7 +32,6 @@ export default class HomepageComponent {
 
 	openPanel() {
 		this.beginSimuStatus = this.beginSimuStatus ? false : true
-		this.indexDmDurableStatus = this.indexDmDurableStatus ? false : true
 		this.nameOfMedicalDevice = ''
 	}
 
