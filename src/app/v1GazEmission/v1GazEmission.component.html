@@ -1,219 +1,240 @@
 <div>
 
-<br>
-<div style="position: relative; display: flex; align-items: center; justify-content: center; width: 100%; padding: 8px 0;">
+	<br>
+	<div
+		style="position: relative; display: flex; align-items: center; justify-content: center; width: 100%; padding: 8px 0;">
+		<div style="position: absolute; left: 16px; top: 50%; transform: translateY(-50%);">
+			<button matButton="tonal" (click)="goTo('/v1')" style="margin-right: 0.5rem;">V1</button>
+			<button matButton="tonal" (click)="goTo('/v2')" style="margin-right: 0.5rem;">V2</button>
+			<button matButton="tonal" (click)="goTo('/v3')" style="margin-right: 0.5rem;">V3</button>
+			<button matButton="tonal" (click)="goTo('/v4')" style="margin-right: 0.5rem;">V4</button>
+			<button matButton="tonal" (click)="goTo('/v5')" style="margin-right: 0.5rem;">V5</button>
+			<button matButton="tonal" (click)="goTo('/v6')" style="margin-right: 0.5rem;">V6</button>
+			<button matButton="tonal" (click)="goTo('/index-dm-durable')">Note finale</button>
+		</div>
+		<h1 style="margin: 0;">
+			Vulnérabilité 1 - Émission de gaz à effet de serre
+		</h1>
 
-	<h1 style="margin: 0;">
-		Vulnérabilité 1 - Émission de gaz à effet de serre
-	</h1>
+		<div style="position: absolute; right: 16px; top: 50%; transform: translateY(-50%);">
+			<button mat-raised-button (click)="goTo('/')">
+				<mat-icon style="margin: auto;">home</mat-icon>
+			</button>
 
-	<div style="position: absolute; right: 16px; top: 50%; transform: translateY(-50%);">
-		<button mat-raised-button (click)="goTo('/')">
-			<mat-icon style="margin: auto;">home</mat-icon>
+		</div>
 
-		</button>
+
+
 	</div>
-
-</div>
-<br>
-<!--Criteria 1-->
-<div style="width: 70%;margin: auto;">
-	<mat-card class="example-card" appearance="outlined" style="padding: 1rem;">
-		<mat-card-header>
-			<mat-card-title>Type de matière premières</mat-card-title>
-		</mat-card-header>
-		<mat-card-content>
-			<br>
-			<form [formGroup]="v1GazEmissionForm">
-				<h2>Intensité carbonne du produit</h2>
-
-				<mat-form-field style="width: 25%;padding-right: 1rem;">
-					<mat-label>Poids en gramme</mat-label>
-					<input matInput type="number" formControlName="weightPrimaryMaterialCarbonneEmission"> 
-				</mat-form-field>
-				<mat-form-field style="width: 50%;">
-					<mat-label>Empreinte carbone matière première principale</mat-label>
-					<input matInput type="number" formControlName="primaryMaterialCarbonneEmission"> 
-				</mat-form-field>
+	<br>
+	<!--Criteria 1-->
+	<div style="width: 70%;margin: auto;">
+		<mat-card class="example-card" appearance="outlined" style="padding: 1rem;">
+			<mat-card-header>
+				<mat-card-title>Type de matière premières</mat-card-title>
+			</mat-card-header>
+			<mat-card-content>
 				<br>
-				<mat-form-field style="width: 50%;">
-					<mat-label>Cas particulier</mat-label>
-					<mat-select>
-						<mat-option (click)="showMaterials(false,false)" value="Aucune des propositions">Aucune des propositions</mat-option>
-						<mat-option (click)="showMaterials(true,false)" value="dispositif médical monomatière">dispositif médical monomatière</mat-option>
-						<mat-option (click)="showMaterials(true,true)" value="dispositif médical bimatière">dispositif médical bimatière</mat-option>
-					</mat-select>
-				</mat-form-field>
-				<a matButton="tonal" href="https://base-empreinte.ademe.fr" target="_blank">Lien</a>
-				<button mat-icon-button class="btn-info" (click)="showInfos()"><mat-icon>info</mat-icon></button>
-				<p>{{txtInfo}}</p>
-				
-				<br>
-				@if(firstMaterialStatus){
+				<form [formGroup]="v1GazEmissionForm">
+					<h2>Intensité carbonne du produit</h2>
 
-				<mat-form-field style="width: 25%;padding-right: 1rem;">
-					<mat-label>Poids en gramme</mat-label>
-					<input matInput type="number" formControlName="weightFirstMaterialCarbonneEmission"> 
-				</mat-form-field>
-				<mat-form-field style="width: 50%;">
-					<mat-label>Empreinte carbone matière première 1</mat-label>
-					<input matInput type="number" formControlName="firstMaterialCarbonneEmission">
-				</mat-form-field>
-				}
-				<br>
-				@if(secondMaterialStatus){
-
-				<mat-form-field style="width: 25%;padding-right: 1rem;">
-					<mat-label>Poids en gramme</mat-label>
-					<input matInput type="number" formControlName="weightSecondMaterialCarbonneEmission"> 
-				</mat-form-field>
-				<mat-form-field style="width: 50%;">
-					<mat-label>Empreinte carbonne matière première 2</mat-label>
-					<input matInput type="number" formControlName="secondMaterialCarbonneEmission">
-				</mat-form-field>
-				}
-			<br>
-			<mat-divider></mat-divider>
-			<h2>Intensité carbonne du produit</h2>
-			<mat-form-field style="width: 50%;">
-				<mat-label>Matériaux rares</mat-label>
-				<!-- Refere to tab 2 page 27-->
-				<mat-select>
-					<mat-option (click)="containsRareMaterialStatus(false)" value="Aucun matériau présent de cette liste">Aucun matériau présent de cette liste</mat-option>
-
-					@for(material of rareMaterialsList; track material){
-					<mat-option (click)="containsRareMaterialStatus(true)" [value]="material">{{material}}</mat-option>
-					}
-				</mat-select>
-			</mat-form-field>
-			</form>
-		</mat-card-content>
-		<mat-card-footer class="example-card-footer" >
-		</mat-card-footer>
-	</mat-card>
-</div>
-<br>
-<!--Criteria 2-->
-<div style="width: 70%;margin: auto;">
-	<mat-card class="example-card" appearance="outlined" style="padding: 1rem;">
-		<mat-card-header>
-			<mat-card-title>Impacts énergétiques</mat-card-title>
-		</mat-card-header>
-		<mat-card-content>
-
-			<form [formGroup]="v1GazEmissionForm">
-				<h2>Lieu de production principal du produit</h2>
-				<mat-form-field style="width: 50%;padding-right: 1rem;">
-					<mat-label>Indicateur intensité Carbone total electricty mix</mat-label>
-					<input matInput type="number" formControlName="totalElectrictyMix"> 
-				</mat-form-field> 	
-				<a matButton="tonal" href="https://app.electricitymaps.com/map/all/yearly" target="_blank">Lien</a>
-				<button mat-icon-button class="btn-info" (click)="showElectricityMixInfo()"><mat-icon>info</mat-icon></button>
-				<p>{{electrictyMixInfo}}</p>
-				<br>
-				<mat-divider></mat-divider>
-				<h2>Recours à des énérgies verts et/ou renouvelables</h2>
-				<section>
-					<mat-checkbox formControlName="greenConsomation">Une partie des consommations énergétiques du site de
-						production est alimentée par un dispositif de
-						production d'énergie renouvelable (éoliennes,
-						panneaux solaires...)</mat-checkbox>
+					<mat-form-field style="width: 25%;padding-right: 1rem;">
+						<mat-label>Poids en gramme</mat-label>
+						<input matInput type="number" formControlName="weightPrimaryMaterialCarbonneEmission">
+					</mat-form-field>
+					<mat-form-field style="width: 50%;">
+						<mat-label>Empreinte carbone matière première principale</mat-label>
+						<input matInput type="number" formControlName="primaryMaterialCarbonneEmission">
+					</mat-form-field>
 					<br>
-					<mat-checkbox formControlName="greenProductionSite">Le site de production dispose d'un contrat
-						d'approvisionnement en énergie verte pour une partie
-						de ses consommations énergétiques du site</mat-checkbox>
-				</section>
-				
-			</form>
-		</mat-card-content>
-	</mat-card>
-</div>
-<br>
-<!--Criteria 3-->
-<div style="width: 70%;margin: auto;">
-	<mat-card appearance="outlined" style="padding: 1rem;">
-		<mat-card-header>
-			<mat-card-title>Transport</mat-card-title>
-		</mat-card-header>
-		<mat-card-content>
-			<form [formGroup]="v1GazEmissionForm">
-				<h2>Mode de transport et distances parcourues</h2>
-				<section>
-					<mat-label>Site de production Français (DOM-TOM exclus) ?</mat-label>
-					<mat-checkbox formControlName="productionSiteFrench">Oui</mat-checkbox>
-				</section>
-				@if(!v1GazEmissionForm.value.productionSiteFrench){
-				<mat-label>Transport 1</mat-label>
-				<mat-form-field style="margin:0 1rem;">
-					<mat-label>Modes de transport</mat-label>
-					<mat-select>
-						<mat-option value=""></mat-option>
+					<mat-form-field style="width: 50%;">
+						<mat-label>Cas particulier</mat-label>
+						<mat-select>
+							<mat-option (click)="showMaterials(false,false)" value="Aucune des propositions">Aucune des
+								propositions</mat-option>
+							<mat-option (click)="showMaterials(true,false)"
+								value="dispositif médical monomatière">dispositif médical monomatière</mat-option>
+							<mat-option (click)="showMaterials(true,true)"
+								value="dispositif médical bimatière">dispositif médical bimatière</mat-option>
+						</mat-select>
+					</mat-form-field>
+					<a matButton="tonal" href="https://base-empreinte.ademe.fr" target="_blank">Lien</a>
+					<button mat-icon-button class="btn-info" (click)="showInfos()"><mat-icon>info</mat-icon></button>
+					<p>{{txtInfo}}</p>
 
-						@for(transport of transportMode; track transport){
-						<mat-option  [value]="transport.coef" (click)="setValueTransport(1,transport.coef)">{{transport.mode}}</mat-option>
-						}
-					</mat-select>
-				</mat-form-field>
-				<mat-form-field style="width: 20%;">
-					<mat-label>Distance Km</mat-label>
-					<input matInput type="number" formControlName="distanceMode1"> 
-				</mat-form-field>
+					<br>
+					@if(firstMaterialStatus){
+
+					<mat-form-field style="width: 25%;padding-right: 1rem;">
+						<mat-label>Poids en gramme</mat-label>
+						<input matInput type="number" formControlName="weightFirstMaterialCarbonneEmission">
+					</mat-form-field>
+					<mat-form-field style="width: 50%;">
+						<mat-label>Empreinte carbone matière première 1</mat-label>
+						<input matInput type="number" formControlName="firstMaterialCarbonneEmission">
+					</mat-form-field>
+					}
+					<br>
+					@if(secondMaterialStatus){
+
+					<mat-form-field style="width: 25%;padding-right: 1rem;">
+						<mat-label>Poids en gramme</mat-label>
+						<input matInput type="number" formControlName="weightSecondMaterialCarbonneEmission">
+					</mat-form-field>
+					<mat-form-field style="width: 50%;">
+						<mat-label>Empreinte carbonne matière première 2</mat-label>
+						<input matInput type="number" formControlName="secondMaterialCarbonneEmission">
+					</mat-form-field>
+					}
+					<br>
+					<mat-divider></mat-divider>
+					<h2>Intensité carbonne du produit</h2>
+					<mat-form-field style="width: 50%;">
+						<mat-label>Matériaux rares</mat-label>
+						<!-- Refere to tab 2 page 27-->
+						<mat-select>
+							<mat-option (click)="containsRareMaterialStatus(false)"
+								value="Aucun matériau présent de cette liste">Aucun matériau présent de cette
+								liste</mat-option>
+
+							@for(material of rareMaterialsList; track material){
+							<mat-option (click)="containsRareMaterialStatus(true)"
+								[value]="material">{{material}}</mat-option>
+							}
+						</mat-select>
+					</mat-form-field>
+				</form>
+			</mat-card-content>
+			<mat-card-footer class="example-card-footer">
+			</mat-card-footer>
+		</mat-card>
+	</div>
+	<br>
+	<!--Criteria 2-->
+	<div style="width: 70%;margin: auto;">
+		<mat-card class="example-card" appearance="outlined" style="padding: 1rem;">
+			<mat-card-header>
+				<mat-card-title>Impacts énergétiques</mat-card-title>
+			</mat-card-header>
+			<mat-card-content>
+
+				<form [formGroup]="v1GazEmissionForm">
+					<h2>Lieu de production principal du produit</h2>
+					<mat-form-field style="width: 50%;padding-right: 1rem;">
+						<mat-label>Indicateur intensité Carbone total electricty mix</mat-label>
+						<input matInput type="number" formControlName="totalElectrictyMix">
+					</mat-form-field>
+					<a matButton="tonal" href="https://app.electricitymaps.com/map/all/yearly" target="_blank">Lien</a>
+					<button mat-icon-button class="btn-info"
+						(click)="showElectricityMixInfo()"><mat-icon>info</mat-icon></button>
+					<p>{{electrictyMixInfo}}</p>
+					<br>
+					<mat-divider></mat-divider>
+					<h2>Recours à des énérgies verts et/ou renouvelables</h2>
+					<section>
+						<mat-checkbox formControlName="greenConsomation">Une partie des consommations énergétiques du
+							site de
+							production est alimentée par un dispositif de
+							production d'énergie renouvelable (éoliennes,
+							panneaux solaires...)</mat-checkbox>
+						<br>
+						<mat-checkbox formControlName="greenProductionSite">Le site de production dispose d'un contrat
+							d'approvisionnement en énergie verte pour une partie
+							de ses consommations énergétiques du site</mat-checkbox>
+					</section>
+
+				</form>
+			</mat-card-content>
+		</mat-card>
+	</div>
+	<br>
+	<!--Criteria 3-->
+	<div style="width: 70%;margin: auto;">
+		<mat-card appearance="outlined" style="padding: 1rem;">
+			<mat-card-header>
+				<mat-card-title>Transport</mat-card-title>
+			</mat-card-header>
+			<mat-card-content>
+				<form [formGroup]="v1GazEmissionForm">
+					<h2>Mode de transport et distances parcourues</h2>
+					<section>
+						<mat-label>Site de production Français (DOM-TOM exclus) ?</mat-label>
+						<mat-checkbox formControlName="productionSiteFrench">Oui</mat-checkbox>
+					</section>
+					@if(!v1GazEmissionForm.value.productionSiteFrench){
+					<mat-label>Transport 1</mat-label>
+					<mat-form-field style="margin:0 1rem;">
+						<mat-label>Modes de transport</mat-label>
+						<mat-select>
+							<mat-option value=""></mat-option>
+
+							@for(transport of transportMode; track transport){
+							<mat-option [value]="transport.coef"
+								(click)="setValueTransport(1,transport.coef)">{{transport.mode}}</mat-option>
+							}
+						</mat-select>
+					</mat-form-field>
+					<mat-form-field style="width: 20%;">
+						<mat-label>Distance Km</mat-label>
+						<input matInput type="number" formControlName="distanceMode1">
+					</mat-form-field>
 					@if(!addTransportStatement){
 					<button mat-icon-button (click)="addTransport()"><mat-icon>add</mat-icon></button>
 					}@else if (addTransportStatement) {
-						<br>
-						<mat-label>Transport 2</mat-label>
-						<mat-form-field style="margin:0 1rem;">
-							<mat-label>Modes de transport</mat-label>
-							<mat-select>
-								<mat-option value=""></mat-option>
-								@for(transport of transportMode; track transport){
-								<mat-option  [value]="transport.coef" (click)="setValueTransport(2,transport.coef)">{{transport.mode}}</mat-option>
-								}
-							</mat-select>
-						</mat-form-field>
+					<br>
+					<mat-label>Transport 2</mat-label>
+					<mat-form-field style="margin:0 1rem;">
+						<mat-label>Modes de transport</mat-label>
+						<mat-select>
+							<mat-option value=""></mat-option>
+							@for(transport of transportMode; track transport){
+							<mat-option [value]="transport.coef"
+								(click)="setValueTransport(2,transport.coef)">{{transport.mode}}</mat-option>
+							}
+						</mat-select>
+					</mat-form-field>
 					<mat-form-field style="width: 20%;">
 						<mat-label>Distance Km</mat-label>
-						<input matInput type="number" formControlName="distanceMode2"> 
+						<input matInput type="number" formControlName="distanceMode2">
 					</mat-form-field>
 					<button mat-icon-button (click)="addTransport()"><mat-icon>remove</mat-icon></button>
 					}
 
-				}
-				<br>
-				<mat-divider></mat-divider>
-				<h2>Fabrication multisite</h2>
+					}
+					<br>
+					<mat-divider></mat-divider>
+					<h2>Fabrication multisite</h2>
 
-				<mat-form-field style="width: 70%;margin:0 1rem;">
+					<mat-form-field style="width: 70%;margin:0 1rem;">
 
-				<mat-label>Nombre de site pour la fabrication et l'assemblage du produit</mat-label>
-					<mat-select formControlName="fabricationMultisite">
-						<mat-option></mat-option>
-						<mat-option [value]="1">1</mat-option>
-						<mat-option [value]="2">2</mat-option>
-						<mat-option [value]="3">3 ou plus</mat-option>
-					</mat-select>
-				</mat-form-field>
-			</form>
-		</mat-card-content>
-	</mat-card>
-</div>
-<br>
-<!--Vulnerability 1-->
-<div style="width: 70%;margin: auto;">
-	<mat-card appearance="outlined" style="padding: 1rem;">
-		<mat-card-header>
-			<mat-card-title>Vulnérabilité 1 - Emission de gaz et et effet de serre</mat-card-title>
-		</mat-card-header>
+						<mat-label>Nombre de site pour la fabrication et l'assemblage du produit</mat-label>
+						<mat-select formControlName="fabricationMultisite">
+							<mat-option></mat-option>
+							<mat-option [value]="1">1</mat-option>
+							<mat-option [value]="2">2</mat-option>
+							<mat-option [value]="3">3 ou plus</mat-option>
+						</mat-select>
+					</mat-form-field>
+				</form>
+			</mat-card-content>
+		</mat-card>
+	</div>
+	<br>
+	<!--Vulnerability 1-->
+	<div style="width: 70%;margin: auto;">
+		<mat-card appearance="outlined" style="padding: 1rem;">
+			<mat-card-header>
+				<mat-card-title>Vulnérabilité 1 - Emission de gaz et et effet de serre</mat-card-title>
+			</mat-card-header>
 			<mat-card-content>
 				<h2>{{vulnerability ? vulnerability: '--'}} points</h2>
 			</mat-card-content>
-	</mat-card>
-		
-</div>
-<br>
-<div style="align-items: center; justify-content: center;text-align: center;">
+		</mat-card>
 
-	<button matButton="tonal" style="margin-left: auto;" (click)="save()">Save</button>
-</div>
+	</div>
+	<br>
+	<div style="align-items: center; justify-content: center;text-align: center;">
+
+		<button matButton="tonal" style="margin-left: auto;" (click)="save()">Save</button>
+	</div>
 </div>

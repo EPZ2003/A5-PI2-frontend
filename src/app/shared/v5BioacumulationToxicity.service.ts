@@ -12,7 +12,7 @@ export class V5BioacumulationToxicityService {
     ) { }
 
     save(fmData: any) {
-        return this.httClient.post(this.url, fmData)
+        return this.httClient.post(this.url + '/' + localStorage.getItem('id-index-dm-durable'), fmData)
     }
 
     getVulnerability(id: number) {
