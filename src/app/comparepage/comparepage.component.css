@@ -1,0 +1,201 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@700&display=swap');
+
+.dashboard-container {
+    width: 300px;
+    height: 170px;
+    display: flex;
+    font-family: 'Bebas Neue', sans-serif;
+    color: white;
+    background-color: transparent;
+    /* Card itself handles backgrounds */
+}
+
+/* Left Panel */
+.left-panel {
+    width: 105px;
+    background-color: #29235C;
+    border-radius: 12px 0 0 12px;
+    display: flex;
+    flex-direction: column;
+    padding: 12px 6px;
+    /* Optimized padding */
+    box-sizing: border-box;
+    position: relative;
+    overflow: hidden;
+    /* Prevent overflow into right panel */
+    justify-content: space-between;
+    /* Better vertical spacing */
+    align-items: flex-start;
+    /* Left align items */
+    text-align: left;
+    /* Left align text */
+}
+
+.title-group {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    /* Ensure titles are left aligned */
+    width: 100%;
+}
+
+.title-main {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 26px;
+    /* Increased slightly */
+    /* 24 pts approx */
+    line-height: 0.9;
+    letter-spacing: 0.5px;
+    margin: 0;
+}
+
+.score-group {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    /* Left align score elements */
+    width: 100%;
+}
+
+.note-label {
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    /* Bold */
+    font-size: 11px;
+    /* Match 11pts spec closer */
+    /* Slightly smaller to match tight look */
+    /* 11 pts */
+    line-height: 1.1;
+    text-transform: uppercase;
+    margin-bottom: -4px;
+    /* Space before number */
+    /* Pull closer to big number */
+    z-index: 10;
+}
+
+.big-score-container {
+    display: flex;
+    align-items: baseline;
+    justify-content: flex-start;
+    /* Left align the score row */
+    white-space: nowrap;
+    margin-top: 5px;
+    width: 100%;
+    margin-left: -2px;
+    /* Slight adjustment */
+}
+
+.big-score {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 64px;
+    /* Back closer to 65px */
+    /* Reduced from 65px to fit 105px width safely */
+    /* 65 pts */
+    line-height: 0.85;
+    /* Reduce line height to sit lower/condensed */
+    margin: 0;
+    letter-spacing: -3px;
+    /* Very tight tracking */
+}
+
+.big-score-total {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 19px;
+    /* Reduced slightly */
+    /* 20 pts */
+    color: white;
+    /* Consolidate user change */
+    margin-left: 1px;
+    letter-spacing: -0.5px;
+}
+
+
+/* Right Panel */
+.right-panel {
+    margin-left: 4px;
+    /* Gap 4px */
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    /* Gap between rows approx 2-3px to fit 170px height */
+    /* 6 items * roughly 25px height + 5 gaps = 150 + gaps. 170px total available */
+    /* Let's use flex-1 to distribute evenly */
+    flex: 1;
+}
+
+.metric-row {
+    display: flex;
+    height: 25px;
+    /* 170px / 6 items - margins approx */
+    flex: 1;
+}
+
+.metric-label-box {
+    width: 155px;
+    background-color: #29235C;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    /* Text left, icon right */
+    padding: 0 6px;
+    /* Tighter padding */
+    box-sizing: border-box;
+    /* First item top-right border radius? Spec image shows rounded corners only on left block mostly, 
+       but usually these lists have rounded corners on the whole container. 
+       The image shows the right blocks seem to have independent rounded corners or maybe just the top/bottom ones?
+       Looking closely at the image:
+       - The left panel is one big block.
+       - The right panel is 6 separate strips.
+       - The top strip and bottom strip likely have rounded right corners, but the image cropping makes it hard to be 100% sure. 
+       - Actually, wait, the arrows in the spec point to specific widths.
+       - I will assume standard small rounded corners or just square for the strips unless visible.
+       - Let's give slight border radius to the right strips for better aesthetics if not strictly specified, 
+         or just follow the "Rounded 12px 0 0 12px" logic for the main block.
+       - Actually looking at the "gap 4px", they are distinct blocks.
+       Let's stick to simple rectangles for the strips, maybe slight radius (4px) on the right side if it looks better, 
+       but strictly, sticking to blocks.
+     */
+    border-radius: 0 4px 4px 0;
+    /* Adding small aesthetic radius */
+}
+
+.metric-text {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 13px;
+    /* Smaller to fit long text */
+    /* approx for readability in small space */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    letter-spacing: 0.3px;
+    margin-right: 4px;
+    /* Space before icon */
+}
+
+.metric-icon {
+    font-size: 14px;
+    /* Variable icon size */
+    height: 14px;
+    width: 14px;
+    min-width: 14px;
+    /* Prevent squishing */
+    /* scale down material icon */
+    transform: scale(0.8);
+}
+
+.metric-score-box {
+    width: 32px;
+    margin-left: 4px;
+    /* Gap 4px */
+    background-color: #29235C;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+}
+
+.metric-score {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 16px;
+    /* 16 pts approx */
+}

@@ -4,13 +4,17 @@ import { V1GazEmissionComponent } from './v1GazEmission/v1GazEmission.component'
 import { V4HealthSecurityWorkConditionComponent } from './v4HealthSecurityConditionWork/v4HealthSecurityWorkCondition.component';
 import { V5BioacumulationToxicity } from './v5BioacumulationToxicity/v5BioacumulationToxicity.component';
 import { FinalPageComponent } from './finalpage/finalpage.component';
-
 import { finalPageResolver } from './shared/finalpage.resolver';
+import ComparePageComponent from './comparepage/comparepage.component';
 
 export const routes: Routes = [
 	{
 		path: '',
 		component: HomepageComponent
+	},
+	{
+		path: 'compare',
+		component: ComparePageComponent
 	},
 	{
 		path: 'v1',

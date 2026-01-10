@@ -17,12 +17,17 @@ export class FinalpageService {
         return this.httClient.get(this.url + '/newDmDurable/' + nameOfMedicalDevice)
     }
 
-    getAllVulnerability() {
-        return this.httClient.get(this.url + "/all-vulnerabilities/" + localStorage.getItem('id-index-dm-durable'))
+    getAllVulnerability(id?: string) {
+        const targetId = id ? id : localStorage.getItem('id-index-dm-durable');
+        return this.httClient.get(this.url + "/all-vulnerabilities/" + targetId)
     }
 
     getDataFromIndexDMDurable(id: string) {
         return this.httClient.get(this.url + "/data/" + id)
+    }
+
+    getAllIndexDMDurable() {
+        return this.httClient.get(this.url + "/all-index-dm-durable")
     }
 
 }
