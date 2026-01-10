@@ -14,11 +14,15 @@ export class FinalpageService {
     }
 
     newIndexDmDurable(nameOfMedicalDevice: string) {
-        return this.httClient.get(this.url + '/' + nameOfMedicalDevice)
+        return this.httClient.get(this.url + '/newDmDurable/' + nameOfMedicalDevice)
     }
 
     getAllVulnerability() {
         return this.httClient.get(this.url + "/all-vulnerabilities/" + localStorage.getItem('id-index-dm-durable'))
+    }
+
+    getDataFromIndexDMDurable(id: string) {
+        return this.httClient.get(this.url + "/data/" + id)
     }
 
 }
