@@ -40,6 +40,7 @@ export default class HomepageComponent {
 			console.log("No name of medical device")
 			return
 		}
+		localStorage.removeItem('all-vs')
 		this.finalpageService.newIndexDmDurable(this.nameOfMedicalDevice).subscribe({
 			next: (id) => {
 				this.toastService.success("Début d'une simulation", {
@@ -65,6 +66,20 @@ export default class HomepageComponent {
 		this.lastSimuStatus = this.lastSimuStatus ? false : true
 		this.nameOfMedicalDevice = localStorage.getItem('name-of-medical-device') ?? null
 		this.indexDmDurableStatus = this.indexDmDurableStatus ? false : true
+		if (!localStorage.getItem('id-index-dm-durable')) {
+			return;
+		}
+		this.finalpageService.getDataFromIndexDMDurable(localStorage.getItem('id-index-dm-durable')!).subscribe({
+			next: (res) => {
+				//Save all vulnerabilities
+				const allVs = JSON.stringify(res)
+				localStorage.setItem('all-vs', allVs)
+			}, error: (err) => {
+				console.log(err)
+			}
+		})
+
+
 	}
 
 	goTo(path: any) {

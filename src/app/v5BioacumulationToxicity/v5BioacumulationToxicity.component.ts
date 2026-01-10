@@ -1,5 +1,5 @@
 import { CommonModule } from "@angular/common";
-import { ChangeDetectorRef, Component } from "@angular/core";
+import { ChangeDetectorRef, Component, OnInit } from "@angular/core";
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from "@angular/forms";
 import { MatButtonModule } from "@angular/material/button";
 import { MatCardModule } from "@angular/material/card";
@@ -29,7 +29,7 @@ import { of, switchMap, tap } from "rxjs";
 		MatRadioModule
 	]
 })
-export class V5BioacumulationToxicity {
+export class V5BioacumulationToxicity implements OnInit {
 
 	V5BioacumulationToxicityForm = new FormGroup({
 		id: new FormControl<Number>(0, Validators.min(0)),
@@ -60,6 +60,28 @@ export class V5BioacumulationToxicity {
 		private cd: ChangeDetectorRef
 	) { }
 
+	ngOnInit(): void {
+		if (localStorage.getItem('all-vs')) {
+			this.refresh()
+		}
+	}
+
+	refresh() {
+		//Need to be re-work
+		const allVs = JSON.parse(localStorage.getItem('all-vs')!)
+		this.V5BioacumulationToxicityForm.patchValue({ makingProcessRisk: allVs.v5BioacumulationToxicity.makingProcessRisk })
+		this.V5BioacumulationToxicityForm.patchValue({ makingProcessProtectionMeasure: allVs.v5BioacumulationToxicity.makingProcessProtectionMeasure })
+		this.V5BioacumulationToxicityForm.patchValue({ finalProductRiskMatter: allVs.v5BioacumulationToxicity.finalProductRiskMatter })
+		this.V5BioacumulationToxicityForm.patchValue({ finalProductConcentration: allVs.v5BioacumulationToxicity.finalProductConcentration })
+		this.V5BioacumulationToxicityForm.patchValue({ finalProductContactAbsence: allVs.v5BioacumulationToxicity.finalProductContactAbsence })
+		this.V5BioacumulationToxicityForm.patchValue({ labelWeitherClear: allVs.v5BioacumulationToxicity.labelWeitherClear })
+		this.V5BioacumulationToxicityForm.patchValue({ labelPresencePicto: allVs.v5BioacumulationToxicity.labelPresencePicto })
+		this.V5BioacumulationToxicityForm.patchValue({ labelTauxInferior: allVs.v5BioacumulationToxicity.labelTauxInferior })
+		this.V5BioacumulationToxicityForm.patchValue({ informationReadablity: allVs.v5BioacumulationToxicity.informationReadablity })
+		this.V5BioacumulationToxicityForm.patchValue({ informationWithFds: allVs.v5BioacumulationToxicity.informationWithFds })
+		this.V5BioacumulationToxicityForm.patchValue({ informationPresence: allVs.v5BioacumulationToxicity.informationPresence })
+		this.cd.detectChanges()
+	}
 
 	goTo(path: any) {
 		this.router.navigate([path])
