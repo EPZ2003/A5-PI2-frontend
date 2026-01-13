@@ -3,68 +3,78 @@
 		<h1 style="text-align: center;justify-content: center;">Page d'accueil du dm durablinator</h1>
 	</div>
 	<div style="padding: 5rem;">
-		<button mat-button (click)="beginSimu()">Commencer la simluation</button>
+		<button mat-button (click)="openPanel()">+ Nouvelle simulation </button>
+		<br>
+		<button mat-button (click)="openLastSimu()">Open last simulation </button>
+		<br>
+		<button mat-button (click)="goTo('/compare')">Comparez deux dispositifs médicales</button>
 		@if(beginSimuStatus){
 		<div style="max-width: 50%;margin: auto;">
-		<mat-accordion>
-			<mat-expansion-panel (opened)="panelOpenState.set(true)" (closed)="panelOpenState.set(false)">
-				<mat-expansion-panel-header> 
-					<mat-panel-title>V1</mat-panel-title>
-					<mat-panel-description>Émission de gaz à effet de serre</mat-panel-description>
-				</mat-expansion-panel-header>
-				<button mat-button (click)="goTo('/v1')">GOTO</button>
-			</mat-expansion-panel>
+			<mat-accordion>
+				<mat-form-field style="width: 25%;padding-right: 1rem;">
+					<mat-label>Nom de l'appareil médical</mat-label>
+					<input matInput type="text" [(ngModel)]="nameOfMedicalDevice">
+				</mat-form-field>
+				<button matButton="filled" (click)="beginSimu()">Commencer la simulation </button>
+				@if(indexDmDurableStatus){
+				<mat-expansion-panel (opened)="panelOpenState.set(true)" (closed)="panelOpenState.set(false)">
+					<mat-expansion-panel-header>
+						<mat-panel-title>V1</mat-panel-title>
+						<mat-panel-description>Émission de gaz à effet de serre</mat-panel-description>
+					</mat-expansion-panel-header>
+					<button mat-button (click)="goTo('/v1')">Allez au formulaire</button>
+				</mat-expansion-panel>
 
-			<mat-expansion-panel (opened)="panelOpenState.set(true)" (closed)="panelOpenState.set(false)">
-				<mat-expansion-panel-header> 
-					<mat-panel-title>V2</mat-panel-title>
-					<mat-panel-description>Consommation en eau</mat-panel-description>
-				</mat-expansion-panel-header>
-				<button mat-button>GOTO</button>
-			</mat-expansion-panel>
+				<mat-expansion-panel (opened)="panelOpenState.set(true)" (closed)="panelOpenState.set(false)">
+					<mat-expansion-panel-header>
+						<mat-panel-title>V2</mat-panel-title>
+						<mat-panel-description>Consommation en eau</mat-panel-description>
+					</mat-expansion-panel-header>
+					<button mat-button>Allez au formulaire</button>
+				</mat-expansion-panel>
 
 			<mat-expansion-panel (opened)="panelOpenState.set(true)" (closed)="panelOpenState.set(false)">
 				<mat-expansion-panel-header> 
 					<mat-panel-title>V3</mat-panel-title>
 					<mat-panel-description>Production et maîtrise des déchets</mat-panel-description>
 				</mat-expansion-panel-header>
-				<button mat-button (click)="goTo('/v3')">GOTO</button>
+				<button mat-button (click)="goTo('/v3')">Allez au formulaire</button>
 			</mat-expansion-panel>
 
-			<mat-expansion-panel (opened)="panelOpenState.set(true)" (closed)="panelOpenState.set(false)">
-				<mat-expansion-panel-header> 
-					<mat-panel-title>V4</mat-panel-title>
-					<mat-panel-description>Santé, sécurité et conditions de travail</mat-panel-description>
-				</mat-expansion-panel-header>
-				<button mat-button>GOTO</button>
-			</mat-expansion-panel>
+				<mat-expansion-panel (opened)="panelOpenState.set(true)" (closed)="panelOpenState.set(false)">
+					<mat-expansion-panel-header>
+						<mat-panel-title>V4</mat-panel-title>
+						<mat-panel-description>Santé, sécurité et conditions de travail</mat-panel-description>
+					</mat-expansion-panel-header>
+					<button mat-button (click)="goTo('/v4')">Allez au formulaire</button>
+				</mat-expansion-panel>
 
-			<mat-expansion-panel (opened)="panelOpenState.set(true)" (closed)="panelOpenState.set(false)">
-				<mat-expansion-panel-header> 
-					<mat-panel-title>V5</mat-panel-title>
-					<mat-panel-description>Bioaccumulation et toxicité</mat-panel-description>
-				</mat-expansion-panel-header>
-				<button mat-button>GOTO</button>
-			</mat-expansion-panel>
-
-
-			<mat-expansion-panel (opened)="panelOpenState.set(true)" (closed)="panelOpenState.set(false)">
-				<mat-expansion-panel-header> 
-					<mat-panel-title>V6</mat-panel-title>
-					<mat-panel-description>Inclusion et diversité</mat-panel-description>
-				</mat-expansion-panel-header>
-				<button mat-button>GOTO</button>
-			</mat-expansion-panel>
+				<mat-expansion-panel (opened)="panelOpenState.set(true)" (closed)="panelOpenState.set(false)">
+					<mat-expansion-panel-header>
+						<mat-panel-title>V5</mat-panel-title>
+						<mat-panel-description>Bioaccumulation et toxicité</mat-panel-description>
+					</mat-expansion-panel-header>
+					<button mat-button (click)="goTo('/v5')">Allez au formulaire</button>
+				</mat-expansion-panel>
 
 
-			<mat-expansion-panel (opened)="panelOpenState.set(true)" (closed)="panelOpenState.set(false)">
-				<mat-expansion-panel-header> 
-					<mat-panel-title>Note Final</mat-panel-title>
-				</mat-expansion-panel-header>
-				<button mat-button>GOTO</button>
-			</mat-expansion-panel>
+				<mat-expansion-panel (opened)="panelOpenState.set(true)" (closed)="panelOpenState.set(false)">
+					<mat-expansion-panel-header>
+						<mat-panel-title>V6</mat-panel-title>
+						<mat-panel-description>Inclusion et diversité</mat-panel-description>
+					</mat-expansion-panel-header>
+					<button mat-button>Allez au formulaire</button>
+				</mat-expansion-panel>
 
-		</mat-accordion>
+
+				<mat-expansion-panel (opened)="panelOpenState.set(true)" (closed)="panelOpenState.set(false)">
+					<mat-expansion-panel-header>
+						<mat-panel-title>Note Final</mat-panel-title>
+					</mat-expansion-panel-header>
+					<button mat-button (click)="goTo('/index-dm-durable')">Allez au formulaire</button>
+				</mat-expansion-panel>
+				}
+			</mat-accordion>
 		</div>
 		}
 	</div>

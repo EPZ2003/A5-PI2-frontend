@@ -1,0 +1,242 @@
+<div>
+	<br>
+	<div
+		style="position: relative; display: flex; align-items: center; justify-content: center; width: 100%; padding: 8px 0;">
+		<div style="position: absolute; left: 16px; top: 50%; transform: translateY(-50%);">
+			<button matButton="tonal" (click)="goTo('/v1')" style="margin-right: 0.5rem;">V1</button>
+			<button matButton="tonal" (click)="goTo('/v2')" style="margin-right: 0.5rem;">V2</button>
+			<button matButton="tonal" (click)="goTo('/v3')" style="margin-right: 0.5rem;">V3</button>
+			<button matButton="tonal" (click)="goTo('/v4')" style="margin-right: 0.5rem;">V4</button>
+			<button matButton="tonal" (click)="goTo('/v5')" style="margin-right: 0.5rem;">V5</button>
+			<button matButton="tonal" (click)="goTo('/v6')" style="margin-right: 0.5rem;">V6</button>
+			<button matButton="tonal" (click)="goTo('/index-dm-durable')">Note finale</button>
+		</div>
+		<h1 style="margin: 0;">
+			Vulnérabilité 4 - Santé, sécurité et conditions de travail
+		</h1>
+
+		<div style="position: absolute; right: 16px; top: 50%; transform: translateY(-50%);">
+			<button mat-raised-button (click)="goTo('/')">
+				<mat-icon style="margin: auto;">home</mat-icon>
+
+			</button>
+		</div>
+
+	</div>
+	<!--Criteria 1--->
+	<br>
+	<div style="width: 70%;margin: auto;">
+		<mat-card appearance="outlined" style="padding:1rem">
+			<mat-card-header>
+				<mat-card-title>Environnements de travail</mat-card-title>
+			</mat-card-header>
+			<mat-card-content>
+				<br>
+				<form [formGroup]="v4HealthSecurityWorkConditionForm">
+					<h2><strong>Investissement dans les environnements de travail</strong></h2>
+					<mat-form-field style="width: 25%; padding-right: 1rem;">
+						<mat-label>Moyenne des investissement santé</mat-label>
+						<input matInput type="number" formControlName="averageHealthInvest">
+					</mat-form-field>
+					<br>
+					<mat-form-field style="width: 25%; padding-right: 1rem;">
+						<mat-label>Total des investissement santé sur le même période</mat-label>
+						<input matInput type="number" formControlName="totalHealhInvest">
+					</mat-form-field>
+					<br>
+					<button mat-icon-button class="btn-info"
+						(click)="showInvestInfo()"><mat-icon>info</mat-icon></button>
+
+					<button mat-icon-button class="btn-danger"
+						(click)="showInvestDanger()"><mat-icon>dangerous</mat-icon></button>
+					<br>
+					@if(showInvestStatement){
+					<p class="txt-info">Les trois dernières années doivent être prises en compte, même si une ou
+						plusieurs années n'ont pas eu d’investissement.
+					<p>
+						}
+						@if(showInvestDangerStatement){
+					<p class="txt-danger">
+						Ne pas inclure les invesstissement suivant<br><br>
+						<strong>Modernisation</strong><br>
+						- Modification d’installations Ŕour améliorer l’ergonomie (tables ajustables, exosquelettes)<br>
+						- Rénovation de bâtiments pour améliorer la qualité de l’air, la lumière ou l’acoustique<br>
+						<br>
+						<strong>Investissements liés aux conditions de travail</strong><br>
+						- Création ou modernisation des espaces de repos, vestiaires, cantines pour améliorer la qualité
+						de vie au travail<br>
+						- Achat de mobilier ergonomique pour prévenir les troubles musculosquelettiques (TMS)<br>
+						<br>
+						<strong>Technologies et outils pour la sécurité</strong><br>
+						- Déploiement d’outils numériques Ŕour la Ŕrévention des risques (caŔteurs de fatigue,
+						aŔŔlications de signalement des incidents)<br>
+						- Acquisition de logiciels ou simulateurs pour la formation à la sécurité (réalité virtuelle,
+						e-learning)
+					</p>
+					}
+
+					<br>
+					<mat-divider></mat-divider>
+					<h2><strong>Part du budget de fonctionnement annuel</strong></h2>
+					<mat-form-field style="width: 35%; padding-right: 1rem;">
+						<mat-label>Total du budget de fonctionnement santé/sécurité sur l'année N-1</mat-label>
+						<input matInput type="number" formControlName="budgetWorkHealthSecurity">
+					</mat-form-field>
+					<br>
+					<mat-form-field style="width: 25%; padding-right: 1rem;">
+						<mat-label>Nombre de salarié du site</mat-label>
+						<input matInput type="number" formControlName="totalWorkerNumber">
+					</mat-form-field>
+					<br>
+					<button mat-icon-button class="btn-info"
+						(click)="showBudgetInfo()"><mat-icon>info</mat-icon></button>
+
+					<button mat-icon-button class="btn-danger"
+						(click)="showBudgetDanger()"><mat-icon>dangerous</mat-icon></button>
+					<br>
+					@if(showBudgetStatement){
+					<p class="txt-info">
+						NB : Les salariés à considérer sont tous ceux qui travaillent sur le site (production, fonctions
+						support, intérimaires,
+						etc.). <br><br>
+						Dépenses de fonctionnement à inclure :<br><br>
+						<strong>Formation et sensibilisation des travailleurs</strong><br>
+						- Sessions de formation à la sécurité (manipulation de produits dangereux, incendie, gestes et
+						postures)<br>
+						- Sensibilisation aux risques psychosociaux, TMS, addictions en entreprise<br>
+						<br>
+						<strong>Équipements de protection individuelle (EPI)</strong><br>
+						- Achat et renouvellement des casques, gants, chaussures de sécurité, lunettes, masques,
+						bouchons d’oreilles<br>
+						- Tenues spécifiques (combinaisons ignifugées, équipements anti-chutes)<br>
+						<br>
+						<strong>Maintenance des dispositifs de sécurité</strong><br>
+						- Entretien des systèmes d’alarme, ventilation, extincteurs<br>
+						- Vérification périodique des machines et équipements de protection collective<br>
+						<br>
+						<strong>Actions de prévention des risques</strong><br>
+						- Réalisation d’audits et diagnostics sécurité<br>
+						- Améliorations mineures des postes de travail pour réduire la pénibilité<br>
+						- Programmes de suivi ergonomique et prévention des TMS<br>
+						<br>
+						<strong>Contrôles et certifications</strong><br>
+						- Coût des certifications (ISO 45001, audits internes et externes en santé/sécurité)<br>
+						- Analyses et mesures des expositions aux risques (bruit, produits chimiques, vibrations)<br>
+					<p>
+						}
+						@if(showBudgetDangerStatement){
+					<p class="txt-danger">
+						<strong>Dépenses à exclure :</strong><br>
+						- Investissements en sécurité (qui relèvent de la première catégorie)<br>
+						- Dépenses générales RH (mutuelle, médecine du travail standard)
+					</p>
+					}
+				</form>
+			</mat-card-content>
+
+		</mat-card>
+
+	</div>
+	<!--Criteria 2--->
+	<br>
+	<div style="width: 70%;margin: auto;">
+		<mat-card appearance="outlined" style="padding:1rem">
+			<mat-card-header>
+				<mat-card-title>Pratique sociales du pays</mat-card-title>
+			</mat-card-header>
+			<mat-card-content>
+				<br>
+				<form [formGroup]="v4HealthSecurityWorkConditionForm">
+					<h2><strong>Index</strong></h2>
+					<mat-form-field style="width: 25%; padding-right: 1rem;">
+						<mat-label>Global Social Progress Index (SPI)</mat-label>
+						<input matInput type="number" formControlName="scoreSPI">
+					</mat-form-field>
+					<a mat-icon-button class="btn-info" target="_blank"
+						href="https://www.socialprogress.org/social-progress-index-time-series"><mat-icon>live_help</mat-icon></a>
+					<p class="txt-info">Vous ne savez quoi mettre, le bouton ? vous renverra vers la ressources à
+						utilisez, vous aurez à référé le score trouvé sur le site, entre 0 et 100.</p>
+
+				</form>
+			</mat-card-content>
+		</mat-card>
+	</div>
+	<!--Criteria 3--->
+	<br>
+	<div style="width: 70%;margin: auto;">
+		<mat-card appearance="outlined" style="padding:1rem">
+			<mat-card-header>
+				<mat-card-title>Système de prévention santé/sécurité au travail</mat-card-title>
+			</mat-card-header>
+			<mat-card-content>
+				<br>
+				<form [formGroup]="v4HealthSecurityWorkConditionForm">
+					<h2><strong>Parts</strong></h2>
+					<mat-form-field style="width: 45%; padding-right: 1rem;">
+						<mat-label>Part des effectifs du site couverts par le système de prévention santé/sécurité au
+							travail</mat-label>
+						<input matInput type="number" formControlName="healthSecurityPrevention">
+					</mat-form-field>
+				</form>
+			</mat-card-content>
+		</mat-card>
+	</div>
+	<!--Criteria 4--->
+	<br>
+	<div style="width: 70%;margin: auto;">
+		<mat-card appearance="outlined" style="padding:1rem">
+			<mat-card-header>
+				<mat-card-title>Accident du travail</mat-card-title>
+			</mat-card-header>
+			<mat-card-content>
+				<br>
+				<form [formGroup]="v4HealthSecurityWorkConditionForm">
+					<h2><strong>Nombre de décès</strong></h2>
+					<section style="width: 45%; padding-right: 1rem;">
+						<mat-label>L'entreprise des décès suite à un ou des accidents de travail ? </mat-label>
+						<mat-checkbox formControlName="workDeath">Oui</mat-checkbox>
+					</section>
+					<br>
+					<mat-divider></mat-divider>
+					<h2><strong>Taux d'accident tu travail</strong></h2>
+					<mat-form-field style="width: 25%; padding-right: 1rem;">
+						<mat-label>Nombre d'accident de travail</mat-label>
+						<input matInput type="number" formControlName="workAccidentNumber">
+					</mat-form-field>
+					<button mat-icon-button class="btn-info"
+						(click)="showWorkAccidentInfo()"><mat-icon>info</mat-icon></button>
+
+					@if(showWorkAccidentStatement){
+					<p class="txt-info">En ne compant seulement que les employés ayant entrainé une incapacité
+						temporaire ou permanante, ou un décès</p>
+					}
+					<br>
+					<mat-form-field style="width: 25%; padding-right: 1rem;">
+						<mat-label>Nombre totale d'heure travaillé</mat-label>
+						<input matInput type="number" formControlName="totalWorkHour">
+					</mat-form-field>
+
+
+				</form>
+			</mat-card-content>
+		</mat-card>
+	</div>
+	<br>
+	<!--Vulnerability 4-->
+	<div style="width: 70%;margin: auto;">
+		<mat-card appearance="outlined" style="padding: 1rem;">
+			<mat-card-header>
+				<mat-card-title>Vulnérabilité 4 - Santé, sécurité et conditions de travail</mat-card-title>
+
+			</mat-card-header>
+			<mat-card-content>
+				<h2>{{vulnerability ? vulnerability: 0}} points</h2>
+			</mat-card-content>
+		</mat-card>
+
+	</div>
+	<div style="display: flex; justify-content: center; width: 100%; margin: 2rem 0;">
+		<button matButton="tonal" (click)="save()">Save</button>
+	</div>
+
+</div>

@@ -1,0 +1,123 @@
+<div>
+    <br>
+    <div
+        style="position: relative; display: flex; align-items: center; justify-content: center; width: 100%; padding: 8px 0;">
+        <div style="position: absolute; left: 16px; top: 50%; transform: translateY(-50%);">
+            <button matButton="tonal" (click)="goTo('/v1')" style="margin-right: 0.5rem;">V1</button>
+            <button matButton="tonal" (click)="goTo('/v2')" style="margin-right: 0.5rem;">V2</button>
+            <button matButton="tonal" (click)="goTo('/v3')" style="margin-right: 0.5rem;">V3</button>
+            <button matButton="tonal" (click)="goTo('/v4')" style="margin-right: 0.5rem;">V4</button>
+            <button matButton="tonal" (click)="goTo('/v5')" style="margin-right: 0.5rem;">V5</button>
+            <button matButton="tonal" (click)="goTo('/v6')" style="margin-right: 0.5rem;">V6</button>
+            <button matButton="tonal" (click)="goTo('/index-dm-durable')">Note finale</button>
+        </div>
+        <h1 style="margin: 0;">
+            Index DM Durable
+        </h1>
+
+        <div style="position: absolute; right: 16px; top: 50%; transform: translateY(-50%);">
+            <button mat-raised-button (click)="goTo('/')">
+                <mat-icon style="margin: auto;">home</mat-icon>
+
+            </button>
+        </div>
+
+    </div>
+
+    <div class="main-wrapper" style="display: flex; justify-content: center; padding: 50px;">
+
+        <div class="dashboard-container">
+            <!-- Left Panel -->
+            <div class="left-panel">
+                <div class="title-group">
+                    <h1 class="title-main">INDEX</h1>
+                    <h1 class="title-main">DM DURABLE</h1>
+                </div>
+
+                <div class="score-group">
+                    <div class="note-label">
+                        <div>NOTE</div>
+                        <div>MOYENNE</div>
+                    </div>
+                    <div class="big-score-container">
+                        <span class="big-score">{{vulnerabilities.index}}</span>
+                        <span class="big-score-total">/20</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Panel -->
+            <div class="right-panel">
+
+                <!-- V1 -->
+                <div class="metric-row">
+                    <div class="metric-label-box">
+                        <span class="metric-text">ÉMISSION DE GAZ À EFFET DE SERRE</span>
+                        <mat-icon class="metric-icon">cloud</mat-icon>
+                    </div>
+
+                    <div class="metric-score-box">
+                        <span class="metric-score">{{vulnerabilities.v1GazEmission}}</span>
+                    </div>
+                </div>
+
+                <!-- V2 -->
+                <div class="metric-row">
+                    <div class="metric-label-box">
+                        <span class="metric-text">CONSOMMATION EN EAU</span>
+                        <mat-icon class="metric-icon">water_drop</mat-icon>
+                    </div>
+                    <div class="metric-score-box">
+                        <span class="metric-score">{{vulnerabilities.v2}}</span>
+                    </div>
+                </div>
+
+                <!-- V3 -->
+                <div class="metric-row">
+                    <div class="metric-label-box">
+                        <span class="metric-text">PRODUCTION ET MAÎTRISE DES DÉCHETS</span>
+                        <mat-icon class="metric-icon">delete</mat-icon>
+                    </div>
+                    <div class="metric-score-box">
+                        <span class="metric-score">{{vulnerabilities.v3}}</span>
+                    </div>
+                </div>
+
+                <!-- V4 -->
+                <div class="metric-row">
+                    <div class="metric-label-box">
+                        <span class="metric-text">SANTÉ, SÉCURITÉ, CONDITION DE TRAVAIL</span>
+                        <mat-icon class="metric-icon">health_and_safety</mat-icon>
+                    </div>
+                    <div class="metric-score-box">
+                        <span class="metric-score">{{vulnerabilities.v4HealthSecurityWorkCondition}}</span>
+                    </div>
+                </div>
+
+                <!-- V5 -->
+                <div class="metric-row">
+                    <div class="metric-label-box">
+                        <span class="metric-text">BIOACCUMULATION, TOXICITÉ</span>
+                        <mat-icon class="metric-icon">science</mat-icon>
+                    </div>
+                    <div class="metric-score-box">
+                        <span class="metric-score">{{vulnerabilities.v5BioacumulationToxicity}}</span>
+                    </div>
+                </div>
+
+                <!-- V6 -->
+                <div class="metric-row">
+                    <div class="metric-label-box">
+                        <span class="metric-text">INCLUSION, DIVERSITÉ</span>
+                        <mat-icon class="metric-icon">groups</mat-icon>
+                    </div>
+                    <div class="metric-score-box">
+                        <span class="metric-score">{{vulnerabilities.v6}}</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>

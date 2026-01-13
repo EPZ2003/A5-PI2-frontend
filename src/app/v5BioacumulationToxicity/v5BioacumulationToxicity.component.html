@@ -1,0 +1,183 @@
+<div>
+	<br>
+	<div
+		style="position: relative; display: flex; align-items: center; justify-content: center; width: 100%; padding: 8px 0;">
+		<div style="position: absolute; left: 16px; top: 50%; transform: translateY(-50%);">
+			<button matButton="tonal" (click)="goTo('/v1')" style="margin-right: 0.5rem;">V1</button>
+			<button matButton="tonal" (click)="goTo('/v2')" style="margin-right: 0.5rem;">V2</button>
+			<button matButton="tonal" (click)="goTo('/v3')" style="margin-right: 0.5rem;">V3</button>
+			<button matButton="tonal" (click)="goTo('/v4')" style="margin-right: 0.5rem;">V4</button>
+			<button matButton="tonal" (click)="goTo('/v5')" style="margin-right: 0.5rem;">V5</button>
+			<button matButton="tonal" (click)="goTo('/v6')" style="margin-right: 0.5rem;">V6</button>
+			<button matButton="tonal" (click)="goTo('/index-dm-durable')">Note finale</button>
+		</div>
+		<h1 style="margin: 0;">
+			Vulnérabilité 5 - Bioaccumulation et toxicité
+		</h1>
+
+		<div style="position: absolute; right: 16px; top: 50%; transform: translateY(-50%);">
+			<button mat-raised-button (click)="goTo('/')">
+				<mat-icon style="margin: auto;">home</mat-icon>
+
+			</button>
+		</div>
+
+	</div>
+	<!--Criteria 1--->
+	<br>
+	<div style="width: 70%;margin: auto;">
+		<mat-card appearance="outlined" style="padding: 1rem;">
+			<mat-card-header>
+				<mat-card-title>Phase de fabrication</mat-card-title>
+			</mat-card-header>
+			<mat-card-content>
+				<br>
+				<form [formGroup]="V5BioacumulationToxicityForm">
+					<h2><strong>Processus de fabrication</strong></h2>
+					<p>Recours à des substances à risques lors de la fabrication ?</p>
+					<mat-radio-group formControlName="makingProcessRisk">
+						<mat-radio-button [value]="true">oui</mat-radio-button>
+						<mat-radio-button [value]="false">non</mat-radio-button>
+					</mat-radio-group>
+					@if(V5BioacumulationToxicityForm.get('makingProcessRisk')?.value === true) {
+					<p>Recours à des mesures de protections ?</p>
+					<mat-radio-group formControlName="makingProcessProtectionMeasure">
+						<mat-radio-button [value]="true">oui</mat-radio-button>
+						<mat-radio-button [value]="false">non</mat-radio-button>
+					</mat-radio-group>
+					}
+					<mat-divider></mat-divider>
+					<h2><strong>Produit fini</strong></h2>
+					<p>
+						Le dispositif médical contient des substances à risques ?
+
+						<button mat-icon-button class="btn-info" (click)="openInfoFinishProduct()">
+							<mat-icon style="margin: auto;">info</mat-icon>
+						</button>
+					</p>
+					<mat-radio-group formControlName="finalProductRiskMatter">
+						<mat-radio-button [value]="true">oui</mat-radio-button>
+						<mat-radio-button [value]="false">non</mat-radio-button>
+					</mat-radio-group>
+					@if(V5BioacumulationToxicityForm.get('finalProductRiskMatter')?.value === true) {
+					<p>La concentration à un taux < 0,1% ?</p>
+							<mat-radio-group formControlName="finalProductConcentration">
+								<mat-radio-button [value]="true">oui</mat-radio-button>
+								<mat-radio-button [value]="false">non</mat-radio-button>
+							</mat-radio-group>
+							<p>Le ou les produits finit du dispositif médical n'ont pas été en contact lors de la/leurs
+								conception ?</p>
+							<mat-radio-group formControlName="finalProductContactAbsence">
+								<mat-radio-button [value]="true">oui</mat-radio-button>
+								<mat-radio-button [value]="false">non</mat-radio-button>
+							</mat-radio-group>
+							}
+							@if(finalProductInfoStatement){
+							<div class="txt-info">
+								<p style="margin-top: 0;">
+									<strong>Règle de cumul :</strong> Si un produit contient plusieurs substances à
+									risque, dès que l'une d'entre elles dépasse le seuil de <strong>0,1 % m/m</strong>,
+									c'est elle qui est prise en considération.
+								</p>
+								<p style="margin-bottom: 0.5rem;"><strong>Exemple pour un DM « X » contenant :</strong>
+								</p>
+								<ul style="margin-top: 0; padding-left: 1.5rem;">
+									<li>Substance A : taux &lt; 0,1 % m/m</li>
+									<li>Substance B : taux <strong>&gt; 0,1 % m/m</strong></li>
+								</ul>
+
+								<p style="margin-bottom: 0; margin-top: 0.5rem;">
+									C'est la donnée de la <strong>Substance B</strong> qui prévaut. <br>
+									Cela conduit à répondre <strong>NON</strong> à la question <em>« concentration &lt;
+										0,1 % m/m »</em>.
+								</p>
+							</div>
+							}
+
+				</form>
+			</mat-card-content>
+		</mat-card>
+	</div>
+	@if(V5BioacumulationToxicityForm.get('finalProductRiskMatter')?.value === true) {
+	<!--Criteria 2--->
+	<br>
+	<div style="width: 70%;margin: auto;">
+		<mat-card appearance="outlined" style="padding:1rem">
+			<mat-card-header>
+				<mat-card-title>Phase utilisation</mat-card-title>
+			</mat-card-header>
+			<mat-card-content>
+				<br>
+				<form [formGroup]="V5BioacumulationToxicityForm">
+					<h2><strong>Étiquetage</strong></h2>
+					<p>Recours à des substances à risques lors de la fabrication ?</p>
+					<mat-radio-group formControlName="labelWeitherClear">
+						<mat-radio-button [value]="true">oui</mat-radio-button>
+						<mat-radio-button [value]="false">non</mat-radio-button>
+					</mat-radio-group>
+					@if(V5BioacumulationToxicityForm.get('labelWeitherClear')?.value === true){
+					<p>Le dispositif présente un étiquetage clair et/ou revoie vers une notice</p>
+					<mat-radio-group formControlName="labelPresencePicto">
+						<mat-radio-button [value]="true">oui</mat-radio-button>
+						<mat-radio-button [value]="false">non</mat-radio-button>
+					</mat-radio-group>
+					@if(V5BioacumulationToxicityForm.get('labelPresencePicto')?.value === true){
+					<p>Le dispositif présente un ou des pictogrammes ou phrases à risques? </p>
+					<mat-radio-group formControlName="labelPresencePicto">
+						<mat-radio-button [value]="true">oui</mat-radio-button>
+						<mat-radio-button [value]="false">non</mat-radio-button>
+					</mat-radio-group>
+					}
+					} @else {
+					<p>Le dispositif présente un taux inférieur à 0.1% </p>
+					<mat-radio-group formControlName="labelTauxInferior">
+						<mat-radio-button [value]="true">oui</mat-radio-button>
+						<mat-radio-button [value]="false">non</mat-radio-button>
+					</mat-radio-group>
+					}
+					<mat-divider></mat-divider>
+					<h2><strong>Information</strong></h2>
+					<p>Lisibilité de l'information concernant les risques toxiques, la qualité de l'information contenue
+						dans la notice d'utilisation</p>
+					<mat-radio-group formControlName="informationReadablity">
+						<mat-radio-button [value]="true">oui</mat-radio-button>
+						<mat-radio-button [value]="false">non</mat-radio-button>
+					</mat-radio-group>
+					@if(V5BioacumulationToxicityForm.get('informationReadablity')?.value === true){
+					<p>La présence d'une obligation légale en lien avec le DM obligeant la mise à
+						disposition de fiche de données de sécurité (FDS)</p>
+					<mat-radio-group formControlName="informationWithFds">
+						<mat-radio-button [value]="true">oui</mat-radio-button>
+						<mat-radio-button [value]="false">non</mat-radio-button>
+					</mat-radio-group>
+					@if(V5BioacumulationToxicityForm.get('informationWithFds')?.value === true){
+					<p>La vérification de la mise à disposition effective de la fiche de données de sécurité lors
+						de la commercialisation.</p>
+					<mat-radio-group formControlName="informationPresence">
+						<mat-radio-button [value]="true">oui</mat-radio-button>
+						<mat-radio-button [value]="false">non</mat-radio-button>
+					</mat-radio-group>
+					}
+					}
+				</form>
+			</mat-card-content>
+		</mat-card>
+	</div>
+	}
+	<br>
+	<!--Vulnerability 5-->
+	<div style="width: 70%;margin: auto;">
+		<mat-card appearance="outlined" style="padding: 1rem;">
+			<mat-card-header>
+				<mat-card-title>Vulnérabilité 5 - Bioaccumulation et toxicité</mat-card-title>
+
+			</mat-card-header>
+			<mat-card-content>
+				<h2>{{vulnerability ? vulnerability: 0}} points</h2>
+			</mat-card-content>
+		</mat-card>
+	</div>
+	<div style="display: flex; justify-content: center; width: 100%; margin: 2rem 0;">
+		<button matButton="tonal" (click)="save()">Save</button>
+	</div>
+</div>
