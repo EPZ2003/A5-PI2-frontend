@@ -28,7 +28,7 @@
 					<mat-panel-title>V3</mat-panel-title>
 					<mat-panel-description>Production et maîtrise des déchets</mat-panel-description>
 				</mat-expansion-panel-header>
-				<button mat-button>GOTO</button>
+				<button mat-button (click)="goTo('/v3')">GOTO</button>
 			</mat-expansion-panel>
 
 			<mat-expansion-panel (opened)="panelOpenState.set(true)" (closed)="panelOpenState.set(false)">

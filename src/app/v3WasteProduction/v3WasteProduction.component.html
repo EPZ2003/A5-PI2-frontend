@@ -1,0 +1,60 @@
+<div>
+
+<br>
+<div style="position: relative; display: flex; align-items: center; justify-content: center; width: 100%; padding: 8px 0;">
+
+    <h1 style="margin: 0;">
+        Vulnérabilité 3 - Production et maîtrise des déchets
+    </h1>
+
+    <div style="position: absolute; right: 16px; top: 50%; transform: translateY(-50%);">
+        <button mat-raised-button (click)="goTo('/')">
+            <mat-icon style="margin: auto;">home</mat-icon>
+
+        </button>
+    </div>
+
+</div>
+<br>
+
+<!-- Critère 1 - Élément 1: Proportion de Matériaux recyclés -->
+<div style="width: 70%;margin: auto;">
+    <mat-card class="example-card" appearance="outlined" style="padding: 1rem;">
+        <mat-card-header>
+            <mat-card-title>Proportion de Matériaux recyclés</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <p>
+                En considérant le dispositif médical comme l'unité fonctionnelle lors de son utilisation, après retrait de toutes les
+                enveloppes de conditionnement, qu'il s'agisse du système de barrière stérile, des enveloppes de protection, de
+                stockage ou de transport, il est nécessaire de pouvoir définir si ce DM contient des substances issues des filières du
+                recyclage ou du réemploi. Donc est ce que le dispositif médical contient des substances issues de filières du
+                recyclage ou du réemploi ?
+            </p>
+
+            <form [formGroup]="v3WasteForm">
+                <mat-radio-group formControlName="renewabledMaterialProportion">
+                    <!-- The values are the points associated (page 39) -->
+                    <mat-radio-button [value]="0">Entre 0 % et 1 %  (0 points)</mat-radio-button>
+                    <br>
+                    <mat-radio-button [value]="1">De 1 % et 30 %  (1 point)</mat-radio-button>
+                    <br>
+                    <mat-radio-button [value]="3">De 30 % et 60 %  (3 points)</mat-radio-button>
+                    <br>
+                    <mat-radio-button [value]="5">De 60 % à 100 %  (5 points)</mat-radio-button>
+                    <br>
+                    <mat-radio-button [value]="5">Aucun besoin en eau pour la production du DM  (5 points)</mat-radio-button>
+                </mat-radio-group>
+            </form>
+
+        </mat-card-content>
+        <mat-card-footer class="example-card-footer" >
+            <div style="margin-top: 1rem; display:flex; gap:1rem; align-items:center;">
+                <button mat-button (click)="save()">Enregistrer</button>
+                <div *ngIf="vulnerability !== null">Points enregistrés: {{vulnerability}}</div>
+            </div>
+        </mat-card-footer>
+    </mat-card>
+</div>
+
+</div>
