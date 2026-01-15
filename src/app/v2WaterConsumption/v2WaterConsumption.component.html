@@ -1,0 +1,195 @@
+<div>
+
+<br>
+<div style="position: relative; display: flex; align-items: center; justify-content: center; width: 100%; padding: 8px 0;">
+    <div style="position: absolute; left: 16px; top: 50%; transform: translateY(-50%);">
+        <button matButton="tonal" (click)="goTo('/v1')" style="margin-right: 0.5rem;">V1</button>
+        <button matButton="tonal" (click)="goTo('/v2')" style="margin-right: 0.5rem;">V2</button>
+        <button matButton="tonal" (click)="goTo('/v3')" style="margin-right: 0.5rem;">V3</button>
+        <button matButton="tonal" (click)="goTo('/v4')" style="margin-right: 0.5rem;">V4</button>
+        <button matButton="tonal" (click)="goTo('/v5')" style="margin-right: 0.5rem;">V5</button>
+        <button matButton="tonal" (click)="goTo('/v6')" style="margin-right: 0.5rem;">V6</button>
+        <button matButton="tonal" (click)="goTo('/index-dm-durable')">Note finale</button>
+    </div>
+    <h1 style="margin: 0;">
+        Vulnérabilité 2 - Consommation en eau
+    </h1>
+
+    <div style="position: absolute; right: 16px; top: 50%; transform: translateY(-50%);">
+        <button mat-raised-button (click)="goTo('/')">
+            <mat-icon style="margin: auto;">home</mat-icon>
+        </button>
+    </div>
+
+</div>
+<br>
+
+<!--Critère 1 - Quantité d'eau-->
+<h2 style="text-align: center;">Critère 1 - Quantité d'eau</h2>
+<br>
+
+<!-- Critère 1 - Élément 1: Consommation en eau pour la fabrication -->
+<div style="width: 70%;margin: auto;">
+    <mat-card class="example-card" appearance="outlined" style="padding: 1rem;">
+        <mat-card-header>
+            <mat-card-title>Élément 1 : Consommation en eau pour la fabrication</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <p>
+                L'Index DM Durable a vocation à intégrer la sobriété appliquée à la consommation dans sa méthodologie de notation.
+                La méthodologie évalue l'engagement du fournisseur en matière de réduction de ses consommations globales en eau 
+                sur le site de fabrication principal.
+            </p>
+            <p>
+                L'objectif de réduction d'au moins 10% de la consommation d'eau fixé est à atteindre en 2030. 
+                Le fournisseur peut choisir son année de référence pour mesurer sa réduction à partir de 2020.
+            </p>
+
+            <form [formGroup]="v2WaterForm">
+                <mat-form-field style="width: 100%;">
+                    <mat-label>Consommation en eau pour la fabrication (Tableau 9)</mat-label>
+                    <mat-select formControlName="waterMadeQuantity">
+                        <mat-option [value]="0">
+                            Le fournisseur n'a pas de document écrit ou dispose d'un objectif inférieur à une réduction d'au moins 10 % de la consommation d'eau (0 point)
+                        </mat-option>
+                        <mat-option [value]="2">
+                            Le fournisseur a fixé par écrit un objectif de réduction d'au moins 10 % de la consommation d'eau dans sa politique interne ou dans un document stratégique (2 points)
+                        </mat-option>
+                        <mat-option [value]="4">
+                            L'objectif est déjà atteint (4 points)
+                        </mat-option>
+                        <mat-option [value]="5">
+                            Le dispositif médical ne nécessite pas d'eau pour sa production (5 points)
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </form>
+
+        </mat-card-content>
+        <mat-card-footer class="example-card-footer">
+        </mat-card-footer>
+    </mat-card>
+</div>
+<br>
+
+<!-- Critère 1 - Élément 2: Consommation en eau à l'usage -->
+<div style="width: 70%;margin: auto;">
+    <mat-card class="example-card" appearance="outlined" style="padding: 1rem;">
+        <mat-card-header>
+            <mat-card-title>Élément 2 : Consommation en eau à l'usage</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <p>
+                Il s'agit d'interroger l'industriel sur le conditionnement de l'eau consommée en phase d'utilisation, 
+                c'est-à-dire lorsque le dispositif médical consomme de l'eau pour son usage.
+            </p>
+            <p>
+                <strong>L'eau non conditionnée</strong> correspond à l'eau issue directement d'un réseau.
+                <br>
+                <strong>L'eau conditionnée</strong> correspond aux eaux préemballées ou conditionnées dans l'établissement utilisateur 
+                et les solutés composés majoritairement d'eau (exemple : NaCl 0,9 %).
+            </p>
+            <p style="font-size: 0.9em; color: #666;">
+                <strong>NOTE :</strong> L'usage « véhiculer un liquide qui sera assimilé par un organisme vivant » 
+                n'est pas considéré comme générant une consommation d'eau car cette eau sera rejetée par l'organisme. 
+                Cet usage doit être noté 5 points. (Exemple : perfuseur, sonde nasogastrique).
+            </p>
+
+            <form [formGroup]="v2WaterForm">
+                <mat-form-field style="width: 100%;">
+                    <mat-label>Consommation en eau à l'usage (Tableau 10)</mat-label>
+                    <mat-select formControlName="waterConsommationQuantity">
+                        <mat-option [value]="0">
+                            L'utilisation du DM nécessite de l'eau conditionnée dans un usage normal (0 point)
+                        </mat-option>
+                        <mat-option [value]="2">
+                            L'utilisation du DM nécessite de l'eau non conditionnée dans un usage normal (2 points)
+                        </mat-option>
+                        <mat-option [value]="5">
+                            L'utilisation du DM ne nécessite pas d'eau dans un usage normal (5 points)
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </form>
+
+        </mat-card-content>
+        <mat-card-footer class="example-card-footer">
+        </mat-card-footer>
+    </mat-card>
+</div>
+<br>
+
+<!--Critère 2 - Réutilisabilité de l'eau-->
+<h2 style="text-align: center;">Critère 2 - Réutilisabilité de l'eau</h2>
+<br>
+
+<!-- Critère 2: Réutilisabilité de l'eau -->
+<div style="width: 70%;margin: auto;">
+    <mat-card class="example-card" appearance="outlined" style="padding: 1rem;">
+        <mat-card-header>
+            <mat-card-title>Réutilisabilité de l'eau</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <p>
+                Il s'agit de mesurer la part en pourcentage que représente la quantité totale d'eau réutilisée 
+                sur la quantité d'eau totale consommée dans le process de fabrication du dispositif médical.
+            </p>
+            <p>
+                Le recyclage de l'eau consiste à récupérer et traiter les eaux usées industrielles pour les réintégrer 
+                ensuite dans le cycle de l'eau du process de l'industriel. La réutilisation de l'eau permet ainsi de 
+                préserver la ressource en eau en diminuant la quantité d'eau prélevée et en limitant l'impact du rejet 
+                des eaux usées dans l'environnement.
+            </p>
+
+            <form [formGroup]="v2WaterForm">
+                <mat-checkbox formControlName="noWaterNeed" style="margin-bottom: 1rem;">
+                    Aucun besoin en eau pour la production du DM (5 points)
+                </mat-checkbox>
+                <br>
+                
+                @if (!v2WaterForm.value.noWaterNeed) {
+                    <mat-form-field style="width: 45%; margin-right: 1rem;">
+                        <mat-label>Quantité totale d'eau réutilisée (m³)</mat-label>
+                        <input matInput type="number" formControlName="totalReusedWater">
+                    </mat-form-field>
+                    <mat-form-field style="width: 45%;">
+                        <mat-label>Quantité totale d'eau consommée (m³)</mat-label>
+                        <input matInput type="number" formControlName="totalConsumedWater">
+                    </mat-form-field>
+                    <br>
+                    <p style="font-size: 0.9em; color: #666; margin-top: 0.5rem;">
+                        <strong>Barème (Tableau 11) :</strong>
+                        <br>• Entre 0% et 1% : 0 point
+                        <br>• De 1% à 30% : 1 point
+                        <br>• De 30% à 60% : 3 points
+                        <br>• De 60% à 100% : 5 points
+                    </p>
+                }
+            </form>
+
+        </mat-card-content>
+        <mat-card-footer class="example-card-footer">
+        </mat-card-footer>
+    </mat-card>
+</div>
+<br>
+
+<!--Vulnerability 2-->
+<div style="width: 70%;margin: auto;">
+    <mat-card appearance="outlined" style="padding: 1rem;">
+        <mat-card-header>
+            <mat-card-title>Vulnérabilité 2 - Consommation en eau</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <h2>{{vulnerability ? vulnerability: '--'}} points</h2>
+        </mat-card-content>
+    </mat-card>
+</div>
+<br>
+<div style="align-items: center; justify-content: center;text-align: center;">
+    <button mat-raised-button color="primary" (click)="save()">Enregistrer</button>
+</div>
+<br>
+
+
+</div>

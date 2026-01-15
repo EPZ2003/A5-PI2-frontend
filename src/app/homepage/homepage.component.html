@@ -30,7 +30,7 @@
 						<mat-panel-title>V2</mat-panel-title>
 						<mat-panel-description>Consommation en eau</mat-panel-description>
 					</mat-expansion-panel-header>
-					<button mat-button>Allez au formulaire</button>
+					<button mat-button (click)="goTo('/v2')">Allez au formulaire</button>
 				</mat-expansion-panel>
 
 			<mat-expansion-panel (opened)="panelOpenState.set(true)" (closed)="panelOpenState.set(false)">
