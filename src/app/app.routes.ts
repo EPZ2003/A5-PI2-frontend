@@ -5,6 +5,7 @@ import { V2WaterConsumptionComponent } from './v2WaterConsumption/v2WaterConsump
 import { V3WasteProductionComponent } from './v3WasteProduction/v3WasteProduction.component';
 import { V4HealthSecurityWorkConditionComponent } from './v4HealthSecurityConditionWork/v4HealthSecurityWorkCondition.component';
 import { V5BioacumulationToxicity } from './v5BioacumulationToxicity/v5BioacumulationToxicity.component';
+import { V6InclusionAndDiversityComponent } from './v6InclusionAndDiversity/v6InclusionAndDiversity.component';
 import { FinalPageComponent } from './finalpage/finalpage.component';
 import { finalPageResolver } from './shared/finalpage.resolver';
 import ComparePageComponent from './comparepage/comparepage.component';
@@ -37,6 +38,10 @@ export const routes: Routes = [
 	{
 		path: 'v5',
 		component: V5BioacumulationToxicity
+	},
+	{
+		path: 'v6',
+		component: V6InclusionAndDiversityComponent
 	},
 	{
 		path: 'index-dm-durable',
