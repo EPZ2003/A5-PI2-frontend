@@ -26,11 +26,11 @@ export class FinalPageComponent implements OnInit {
 
     vulnerabilities = {
         v1GazEmission: '',
-        v2: '',
-        v3: '',
+        v2WaterConsumption: '',
+        v3WasteProduction: '',
         v4HealthSecurityWorkCondition: '',
         v5BioacumulationToxicity: '',
-        v6: '',
+        v6InclusionAndDiversity: '',
         index: 0,
     };
 
@@ -40,11 +40,11 @@ export class FinalPageComponent implements OnInit {
         if (data) {
             this.vulnerabilities = data;
             this.vulnerabilities.index = Number(this.vulnerabilities.v1GazEmission +
-                this.vulnerabilities.v2 +
-                this.vulnerabilities.v3 +
+                this.vulnerabilities.v2WaterConsumption +
+                this.vulnerabilities.v3WasteProduction +
                 this.vulnerabilities.v4HealthSecurityWorkCondition +
                 this.vulnerabilities.v5BioacumulationToxicity +
-                this.vulnerabilities.v6) / 6;
+                this.vulnerabilities.v6InclusionAndDiversity) / 6;
 
             this.roundIndex();
         }

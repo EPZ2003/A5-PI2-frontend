@@ -1,6 +1,6 @@
 <div>
 	<div style="justify-content: center;text-align: center;">
-		<h1 style="text-align: center;justify-content: center;">Page d'accueil du dm durablinator</h1>
+		<h1 style="text-align: center;justify-content: center;">Calculateur d'index DM durable</h1>
 	</div>
 	<div style="padding: 5rem;">
 		<button mat-button (click)="openPanel()">+ Nouvelle simulation </button>
@@ -30,7 +30,7 @@
 						<mat-panel-title>V2</mat-panel-title>
 						<mat-panel-description>Consommation en eau</mat-panel-description>
 					</mat-expansion-panel-header>
-					<button mat-button>Allez au formulaire</button>
+					<button mat-button (click)="goTo('/v2')">Allez au formulaire</button>
 				</mat-expansion-panel>
 
 				<mat-expansion-panel (opened)="panelOpenState.set(true)" (closed)="panelOpenState.set(false)">
@@ -38,7 +38,7 @@
 						<mat-panel-title>V3</mat-panel-title>
 						<mat-panel-description>Production et maîtrise des déchets</mat-panel-description>
 					</mat-expansion-panel-header>
-					<button mat-button>Allez au formulaire</button>
+					<button mat-button (click)="goTo('/v3')">Allez au formulaire</button>
 				</mat-expansion-panel>
 
 				<mat-expansion-panel (opened)="panelOpenState.set(true)" (closed)="panelOpenState.set(false)">
@@ -63,7 +63,7 @@
 						<mat-panel-title>V6</mat-panel-title>
 						<mat-panel-description>Inclusion et diversité</mat-panel-description>
 					</mat-expansion-panel-header>
-					<button mat-button>Allez au formulaire</button>
+					<button mat-button (click)="goTo('/v6')">Allez au formulaire</button>
 				</mat-expansion-panel>
 
 

@@ -1,0 +1,292 @@
+<div>
+
+<br>
+<div style="position: relative; display: flex; align-items: center; justify-content: center; width: 100%; padding: 8px 0;">
+    <div style="position: absolute; left: 16px; top: 50%; transform: translateY(-50%);">
+        <button matButton="tonal" (click)="goTo('/v1')" style="margin-right: 0.5rem;">V1</button>
+        <button matButton="tonal" (click)="goTo('/v2')" style="margin-right: 0.5rem;">V2</button>
+        <button matButton="tonal" (click)="goTo('/v3')" style="margin-right: 0.5rem;">V3</button>
+        <button matButton="tonal" (click)="goTo('/v4')" style="margin-right: 0.5rem;">V4</button>
+        <button matButton="tonal" (click)="goTo('/v5')" style="margin-right: 0.5rem;">V5</button>
+        <button matButton="tonal" (click)="goTo('/v6')" style="margin-right: 0.5rem;">V6</button>
+        <button matButton="tonal" (click)="goTo('/index-dm-durable')">Note finale</button>
+    </div>
+    <h1 style="margin: 0;">
+        Vulnérabilité 6 - Inclusion et diversité
+    </h1>
+
+    <div style="position: absolute; right: 16px; top: 50%; transform: translateY(-50%);">
+        <button mat-raised-button (click)="goTo('/')">
+            <mat-icon style="margin: auto;">home</mat-icon>
+        </button>
+    </div>
+
+</div>
+<br>
+
+<!-- Critère 1 - Composition démographique -->
+<h2 style="text-align: center;">Critère 1 - Composition démographique</h2>
+<br>
+
+<!-- Élément 1: Emploi des jeunes et des seniors -->
+<div style="width: 70%;margin: auto;">
+    <mat-card class="example-card" appearance="outlined" style="padding: 1rem;">
+        <mat-card-header>
+            <mat-card-title>Élément 1 : Emploi des jeunes et des seniors</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <p>
+                Il s'agit de mesurer l'emploi des juniors (moins de 30 ans) et de celui des seniors (plus de 50 ans) 
+                sur le site de production principal, de manière quantitative.
+            </p>
+            <p style="font-size: 0.9em; color: #666;">
+                <strong>Tableau 21 — Table de notation « emploi des jeunes et des seniors »</strong>
+                <br>• Moins de 30 ans : 0-10% → 1 point | 10-20% → 3 points | 20%+ → 5 points
+                <br>• Plus de 50 ans : 0-10% → 1 point | 10-20% → 3 points | 20%+ → 5 points
+            </p>
+
+            <form [formGroup]="v6Form">
+                <mat-form-field style="width: 45%; margin-right: 1rem;">
+                    <mat-label>Emploi des jeunes pourcentage</mat-label>
+                    <input matInput type="number" formControlName="youngEmploymentPercentage" min="0" max="100" step="0.01">
+                </mat-form-field>
+                <mat-form-field style="width: 45%;">
+                    <mat-label>Emploi des séniors pourcentage</mat-label>
+                    <input matInput type="number" formControlName="seniorEmploymentPercentage" min="0" max="100" step="0.01">
+                </mat-form-field>
+            </form>
+
+        </mat-card-content>
+        <mat-card-footer class="example-card-footer">
+        </mat-card-footer>
+    </mat-card>
+</div>
+<br>
+
+<!-- Élément 2: Répartition par sexe dans l'encadrement supérieur -->
+<div style="width: 70%;margin: auto;">
+    <mat-card class="example-card" appearance="outlined" style="padding: 1rem;">
+        <mat-card-header>
+            <mat-card-title>Élément 2 : Répartition par sexe dans l'encadrement supérieur</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <p>
+                Il s'agit de mesurer la répartition par sexe en pourcentage, au niveau de l'encadrement supérieur, 
+                sur le site de fabrication principal.
+            </p>
+            <p style="font-size: 0.9em; color: #666;">
+                <strong>Tableau 22 — Table de notation « répartition par sexe dans l'encadrement supérieur »</strong>
+                <br>• 0-30% → 2 points | 30-50% → 6 points | 50%+ → 10 points
+            </p>
+
+            <form [formGroup]="v6Form">
+                <mat-form-field style="width: 100%;">
+                    <mat-label>Pourcentage de femmes dans l'encadrement supérieur</mat-label>
+                    <input matInput type="number" formControlName="womenManagementPercentage" min="0" max="100" step="0.01">
+                </mat-form-field>
+            </form>
+
+        </mat-card-content>
+        <mat-card-footer class="example-card-footer">
+        </mat-card-footer>
+    </mat-card>
+</div>
+<br>
+
+<!-- Élément 3: Consolidation -->
+<div style="width: 70%;margin: auto;">
+    <mat-card class="example-card" appearance="outlined" style="padding: 1rem;">
+        <mat-card-header>
+            <mat-card-title>Consolidation - Note de composition démographique</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <h3>{{demographicCompositionPoints !== null ? demographicCompositionPoints : '--'}} / 20 points</h3>
+            <p style="font-size: 0.9em; color: #666;">
+                <strong>Calcul :</strong> Score emploi des jeunes et seniors + Score répartition par sexe
+            </p>
+        </mat-card-content>
+    </mat-card>
+</div>
+<br>
+
+<!-- Critère 2 - Équité salariale -->
+<h2 style="text-align: center;">Critère 2 - Équité salariale</h2>
+<br>
+
+<div style="width: 70%;margin: auto;">
+    <mat-card class="example-card" appearance="outlined" style="padding: 1rem;">
+        <mat-card-header>
+            <mat-card-title>Équité salariale</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <p>
+                L'équité salariale est le principe selon lequel tous les employés doivent recevoir une rémunération 
+                égale pour un travail de valeur égale, indépendamment de leur sexe.
+            </p>
+            <p style="font-size: 0.9em; color: #666;">
+                <strong>Tableau 23 — Table de notation « équité salariale »</strong>
+                <br>• 0-1% → 20 points | 1-5% → 12 points | 5-10% → 4 points | 10%+ → 0 point
+            </p>
+
+            <form [formGroup]="v6Form">
+                <mat-form-field style="width: 45%; margin-right: 1rem;">
+                    <mat-label>Rémunération moyenne horaire brute hommes (%)</mat-label>
+                    <input matInput type="number" formControlName="menAverageHourlyWage" min="0" step="0.01">
+                </mat-form-field>
+                <mat-form-field style="width: 45%;">
+                    <mat-label>Rémunération moyenne horaire brute femmes (%)</mat-label>
+                    <input matInput type="number" formControlName="womenAverageHourlyWage" min="0" step="0.01">
+                </mat-form-field>
+            </form>
+
+        </mat-card-content>
+    </mat-card>
+</div>
+<br>
+
+<!-- Calcul de l'écart de rémunération -->
+<div style="width: 70%;margin: auto;">
+    <mat-card class="example-card" appearance="outlined" style="padding: 1rem;">
+        <mat-card-header>
+            <mat-card-title>Calcul de l'écart de rémunération</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            @if (salarialEquityGap !== null) {
+                <p>
+                    <strong>Écart de rémunération :</strong> {{salarialEquityGap | number:'1.2-2'}}%
+                </p>
+                <h3>Points attribués : {{salarialEquityPoints !== null ? salarialEquityPoints : '--'}} / 20</h3>
+                <p style="font-size: 0.9em; color: #666;">
+                    <strong>Formule :</strong> Écart F/H = (RmoyH - RmoyF) / RmoyH × 100
+                </p>
+            } @else {
+                <p style="color: #999;">Complétez les champs de rémunération pour voir le calcul</p>
+            }
+        </mat-card-content>
+    </mat-card>
+</div>
+<br>
+
+<!-- Critère 3 - Accessibilité et inclusion des personnes en situation de handicap -->
+<h2 style="text-align: center;">Critère 3 - Accessibilité et inclusion des personnes en situation de handicap</h2>
+<br>
+
+<div style="width: 70%;margin: auto;">
+    <mat-card class="example-card" appearance="outlined" style="padding: 1rem;">
+        <mat-card-header>
+            <mat-card-title>Accessibilité et inclusion des personnes en situation de handicap</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <p>
+                Ce critère mesure la proportion de personnes en situation de handicap représentée parmi les salariés 
+                de l'entreprise, reliée au site de fabrication principal du DM.
+            </p>
+            <p style="font-size: 0.9em; color: #666;">
+                <strong>Tableau 24 — Table de notation « accessibilité et inclusion »</strong>
+                <br>• 0-3% → 4 points | 3-9% → 12 points | 9%+ → 20 points
+            </p>
+
+            <form [formGroup]="v6Form">
+                <mat-form-field style="width: 45%; margin-right: 1rem;">
+                    <mat-label>Nombre de personnes en situation de handicap</mat-label>
+                    <input matInput type="number" formControlName="disabledEmployeesCount" min="0">
+                </mat-form-field>
+                <mat-form-field style="width: 45%;">
+                    <mat-label>Nombre de salariés total sur le site</mat-label>
+                    <input matInput type="number" formControlName="totalEmployeesCount" min="0">
+                </mat-form-field>
+            </form>
+
+        </mat-card-content>
+    </mat-card>
+</div>
+<br>
+
+<!-- Représentativité -->
+<div style="width: 70%;margin: auto;">
+    <mat-card class="example-card" appearance="outlined" style="padding: 1rem;">
+        <mat-card-header>
+            <mat-card-title>Représentativité</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            @if (disabledEmployeesPercentage !== null) {
+                <p>
+                    <strong>Taux de représentativité :</strong> {{disabledEmployeesPercentage | number:'1.2-2'}}%
+                </p>
+                <h3>Points attribués : {{accessibilityAndInclusionPoints !== null ? accessibilityAndInclusionPoints : '--'}} / 20</h3>
+                <p style="font-size: 0.9em; color: #666;">
+                    <strong>Formule :</strong> Représentativité = Nbh / Nb × 100
+                </p>
+            } @else {
+                <p style="color: #999;">Complétez les champs d'effectifs pour voir le calcul</p>
+            }
+        </mat-card-content>
+    </mat-card>
+</div>
+<br>
+
+<!-- Critère 4 - Lutte contre les discriminations -->
+<h2 style="text-align: center;">Critère 4 - Lutte contre les discriminations</h2>
+<br>
+
+<div style="width: 70%;margin: auto;">
+    <mat-card class="example-card" appearance="outlined" style="padding: 1rem;">
+        <mat-card-header>
+            <mat-card-title>Lutte contre les discriminations</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <p>
+                Ce critère mesure de quelle manière les personnes subissant des discriminations sont en capacité de 
+                les signaler, et si ces alertes sont traitées.
+            </p>
+
+            <form [formGroup]="v6Form">
+                <p><strong>Une organisation est mise en place ?</strong></p>
+                <mat-radio-group formControlName="discriminationOrganizationInPlace" style="margin-bottom: 2rem;">
+                    <mat-radio-button [value]="true" style="margin-right: 2rem;">Oui</mat-radio-button>
+                    <mat-radio-button [value]="false">Non</mat-radio-button>
+                </mat-radio-group>
+
+                @if (v6Form.value.discriminationOrganizationInPlace === true) {
+                    <p><strong>Il existe un suivi des alertes ?</strong></p>
+                    <mat-radio-group formControlName="followUpAlerts">
+                        <mat-radio-button [value]="true" style="margin-right: 2rem;">Oui → +20 points</mat-radio-button>
+                        <mat-radio-button [value]="false">Non → +12 points</mat-radio-button>
+                    </mat-radio-group>
+                } @else if (v6Form.value.discriminationOrganizationInPlace === false) {
+                    <p style="color: #d32f2f;"><strong>Aucune organisation mise en place → 0 points</strong></p>
+                }
+            </form>
+
+        </mat-card-content>
+    </mat-card>
+</div>
+<br>
+
+<!-- Affichage final de la vulnérabilité -->
+<div style="width: 70%;margin: auto;">
+    <mat-card appearance="outlined" style="padding: 1rem;">
+        <mat-card-header>
+            <mat-card-title>Vulnérabilité 6 - Inclusion et diversité</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <h2>{{vulnerability !== null ? (vulnerability | number:'1.2-2') : '--'}} / 20 points</h2>
+            <p style="font-size: 0.9em; color: #666;">
+                <strong>Tableau 25 — Consolidation des critères</strong>
+                <br>• Critère 1 - Composition démographique : {{demographicCompositionPoints !== null ? demographicCompositionPoints : '--'}} /20
+                <br>• Critère 2 - Équité salariale : {{salarialEquityPoints !== null ? salarialEquityPoints : '--'}} /20
+                <br>• Critère 3 - Accessibilité et inclusion : {{accessibilityAndInclusionPoints !== null ? accessibilityAndInclusionPoints : '--'}} /20
+                <br>• Critère 4 - Lutte contre les discriminations : {{antidiscriminationPoints !== null ? antidiscriminationPoints : '--'}} /20
+                <br><strong>Sous-total /80 × 0.25 = Note /20</strong>
+            </p>
+        </mat-card-content>
+    </mat-card>
+</div>
+<br>
+
+<div style="align-items: center; justify-content: center;text-align: center;">
+    <button mat-raised-button color="primary" (click)="save()">Enregistrer</button>
+</div>
+<br>
+
+</div>

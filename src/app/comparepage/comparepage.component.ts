@@ -43,21 +43,21 @@ export default class ComparePageComponent implements OnInit {
     // Initialize with default structure
     vulnerabilities1: any = {
         v1GazEmission: '',
-        v2: '',
-        v3: '',
+        v2WaterConsumption: '',
+        v3WasteProduction: '',
         v4HealthSecurityWorkCondition: '',
         v5BioacumulationToxicity: '',
-        v6: '',
+        v6InclusionAndDiversity: '',
         index: 0
     };
 
     vulnerabilities2: any = {
         v1GazEmission: '',
-        v2: '',
-        v3: '',
+        v2WaterConsumption: '',
+        v3WasteProduction: '',
         v4HealthSecurityWorkCondition: '',
         v5BioacumulationToxicity: '',
-        v6: '',
+        v6InclusionAndDiversity: '',
         index: 0
     };
 
@@ -98,11 +98,11 @@ export default class ComparePageComponent implements OnInit {
 
     calculateIndex(vulnerabilities: any) {
         vulnerabilities.index = Number(vulnerabilities.v1GazEmission +
-            vulnerabilities.v2 +
-            vulnerabilities.v3 +
+            vulnerabilities.v2WaterConsumption +
+            vulnerabilities.v3WasteProduction +
             vulnerabilities.v4HealthSecurityWorkCondition +
             vulnerabilities.v5BioacumulationToxicity +
-            vulnerabilities.v6) / 6;
+            vulnerabilities.v6InclusionAndDiversity) / 6;
 
         vulnerabilities.index = Math.round(Number(vulnerabilities.index) * 10) / 10;
     }
