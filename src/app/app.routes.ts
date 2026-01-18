@@ -1,6 +1,8 @@
 import { Routes } from '@angular/router';
 import HomepageComponent from './homepage/homepage.component';
 import { V1GazEmissionComponent } from './v1GazEmission/v1GazEmission.component';
+import { V2WaterConsumptionComponent } from './v2WaterConsumption/v2WaterConsumption.component';
+import { V3WasteProductionComponent } from './v3WasteProduction/v3WasteProduction.component';
 import { V4HealthSecurityWorkConditionComponent } from './v4HealthSecurityConditionWork/v4HealthSecurityWorkCondition.component';
 import { V5BioacumulationToxicity } from './v5BioacumulationToxicity/v5BioacumulationToxicity.component';
 import { FinalPageComponent } from './finalpage/finalpage.component';
@@ -19,6 +21,14 @@ export const routes: Routes = [
 	{
 		path: 'v1',
 		component: V1GazEmissionComponent
+	},
+	{
+		path: 'v2',
+		component: V2WaterConsumptionComponent
+	},
+	{
+		path:'v3',
+		component:V3WasteProductionComponent
 	},
 	{
 		path: 'v4',
