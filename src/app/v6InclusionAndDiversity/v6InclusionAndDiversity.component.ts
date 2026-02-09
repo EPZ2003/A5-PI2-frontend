@@ -253,6 +253,39 @@ export class V6InclusionAndDiversityComponent implements OnInit{
             return;
         }
 
+        // Validation spécifique pour totalEmployeesCount (avant la validation générale)
+        const totalEmployeesCount = this.v6Form.value.totalEmployeesCount;
+        if (totalEmployeesCount !== null && totalEmployeesCount !== undefined && totalEmployeesCount < 1) {
+            this.toastService.error('Le nombre total d\'employé doit être supérieur à 0', {
+                duration: AppConstants.LONG_TEXT_DURATION,
+                dismissible: true
+            });
+            this.cd.detectChanges();
+            return;
+        }
+
+        // Validation spécifique pour disabledEmployeesCount
+        const disabledEmployeesCount = this.v6Form.value.disabledEmployeesCount;
+        if (disabledEmployeesCount !== null && disabledEmployeesCount !== undefined && disabledEmployeesCount < 0) {
+            this.toastService.error('Le nombre de personnes en situation de handicap ne peut pas être négatif', {
+                duration: AppConstants.LONG_TEXT_DURATION,
+                dismissible: true
+            });
+            this.cd.detectChanges();
+            return;
+        }
+
+        if (disabledEmployeesCount !== null && disabledEmployeesCount !== undefined && 
+            totalEmployeesCount !== null && totalEmployeesCount !== undefined && 
+            disabledEmployeesCount > totalEmployeesCount) {
+            this.toastService.error('Le nombre de personnes en situation de handicap ne peut pas dépasser le nombre total d\'employés', {
+                duration: AppConstants.LONG_TEXT_DURATION,
+                dismissible: true
+            });
+            this.cd.detectChanges();
+            return;
+        }
+
         if (!this.v6Form.valid) {
             this.v6Form.markAllAsTouched()
             this.toastService.error('Veuillez compléter tous les champs obligatoires avant d\'enregistrer.')
